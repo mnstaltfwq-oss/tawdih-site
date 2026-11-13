@@ -30,11 +30,12 @@ const T = {
   contact: () => [C.PageHead(), C.Section(`<div class="contact">${C.ContactForm()}<div class="contact__info">${rep(5, C.ContactCard)}</div></div>`)]
 };
 
+Object.assign(T, window.REAL_T || {});
 function mount(name, active) {
   document.body.classList.toggle('has-mobile-cta', name === 'detail' || name === 'entity');
   document.body.insertAdjacentHTML('afterbegin', C.Header(active));
   document.body.insertAdjacentHTML('beforeend', `<main id="main">${T[name]().join('')}</main>` + C.Footer());
-  bind();
+  bind(); window.REAL_BIND && window.REAL_BIND();
 }
 
 function bind() {

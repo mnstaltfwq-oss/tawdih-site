@@ -1,5 +1,6 @@
 /* Real content layer (توضيح المعرفة). Overrides placeholder renderers for the home page and shared footer. */
 const WA = 'https://wa.me/966535448100';
+window.REAL_T = {};
 const ICO = {
   bld: '<path d="M5 21V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v17M15 9h3a1 1 0 0 1 1 1v11M3 21h18M9 7h2M9 11h2M9 15h2"/>',
   chk: '<path d="M20 6 9 17l-5-5"/>',
@@ -37,7 +38,7 @@ const GOV = [
   ['تأسيس الشركات والمنشآت', 'نساعدك في خطوات تأسيس نشاطك التجاري، بدءًا من تحديد الإجراءات المطلوبة وحتى استكمال خدمات التسجيل والتأسيس.', 'ابدأ التأسيس']
 ];
 C.GovCard = ([t, d, b = 'عرض الخدمات']) => `<a class="card card--real card--gov" href="entity.html"><span class="ico">${C.ico('bld')}</span><h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
-C.GovGrid = () => `<div class="grid grid--4">${GOV.map(C.GovCard).join('')}</div>`;
+C.GovGrid = () => `<div class="grid grid--4">${GOV.map((g, i) => C.GovCard(g, i)).join('')}</div>`;
 
 C.ConsultReal = () => `<div class="cons cons--real"><div class="cons__cards grid grid--2">${[
   ['تشخيص وضع المنشأة', 'نراجع احتياج منشأتك ونساعدك في تحديد الإجراء المطلوب والجهة المختصة والخطوات المناسبة لمعالجة الطلب.'],
@@ -125,3 +126,53 @@ C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="
 <ul class="hero__badges hero__badges--real"><li>${C.ico('calchk', 22)}متابعة منظمة للإجراءات</li><li>${C.ico('shield', 22)}خصوصية بيانات المنشأة</li><li>${C.ico('pin', 22)}نخدم جميع مناطق المملكة</li></ul>
 </div></div></section>`;
 C.StatisticsPanel = () => `<div class="container"><div class="stats stats--real" role="list">${[['cal', '+6', 'سنوات من الخبرة'], ['users', '+250', 'عميل خدمناهم'], ['layers', '+25', 'خدمة أعمال وحلول حكومية'], ['star', '95%', 'نسبة رضا العملاء']].map(([i, n, l]) => `<div class="stats__item" role="listitem"><span class="stats__ico">${C.ico(i, 24)}</span><div><div class="stats__n" dir="ltr">${n}</div><div class="stats__l">${l}</div></div></div>`).join('')}</div></div>`;
+
+/* ---- services directory / entity / service detail (data.js from the services guide) ---- */
+const qp = k => new URLSearchParams(location.search).get(k);
+const tagCls = t => t ? `<span class="tag">${t}</span>` : '';
+const waTxt = s => `${WA}?text=${encodeURIComponent(s)}`;
+const entHref = i => `entity.html?e=${i}`;
+const svcHref = i => `service-detail.html?s=${i}`;
+const entIdx = pre => { const i = ENT.findIndex(e => e.n.startsWith(pre)); return i < 0 ? 0 : i; };
+const GOV_MAP = ['وزارة التجارة', 'وزارة التجارة', 'وزارة الموارد البشرية', 'وزارة الاستثمار', 'وزارة البلديات', 'المؤسسة العامة للتأمينات', 'هيئة الزكاة', 'وزارة الداخلية', 'وزارة الخارجية', 'وزارة الصناعة', 'الهيئة السعودية للملكية', 'وزارة التجارة'];
+C.GovCard = ([t, d, b = 'عرض الخدمات'], i) => `<a class="card card--real card--gov" href="${entHref(entIdx(GOV_MAP[i]))}"><span class="ico">${C.ico('bld')}</span><h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
+
+C.PHeadReal = (title, sub, crumbs) => `<section class="phead phead--real"><div class="container"><nav class="crumb crumb--real" aria-label="مسار الصفحة">${crumbs.map(([t, h]) => h ? `<a href="${h}">${t}</a><span>/</span>` : `<span>${t}</span>`).join('')}</nav><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ''}</div></section>`;
+C.SvcCard = (s, i, showEnt = true) => `<a class="card card--real card--svc" href="${svcHref(i)}" data-e="${s.e}" data-q="${(s.n + ' ' + s.d + ' ' + ENT[s.e].n).replace(/"/g, '')}">${tagCls(s.t)}<h3>${s.n}</h3>${showEnt ? `<div class="svc__ent">${ENT[s.e].n}</div>` : ''}<p>${s.d}</p><span class="more">تفاصيل الخدمة ${C.ico('arr', 18)}</span></a>`;
+C.Side = (title, text, msg) => `<aside class="sidebar"><div class="card card--real"><h3>${title}</h3><p>${text}</p>${wab('اطلب الخدمة عبر واتساب').replace(WA, waTxt(msg))}<div class="side__phone">${C.ico('chat', 18)}<span dir="ltr">0535448100</span></div></div></aside>`;
+
+REAL_T.directory = () => [
+  C.PHeadReal('دليل الخدمات الحكومية للمنشآت', `${SVC.length} خدمة في ${ENT.length} جهة ومنصة حكومية. اختر الخدمة التي تحتاجها، ونوضح لك متطلباتها ونتابع إجراءاتها.`, [['الرئيسية', 'index.html'], ['جميع الخدمات']]),
+  C.Section(`<div class="dirbar"><input class="search search--wide" id="svc-q" type="search" placeholder="ابحث عن خدمة أو جهة" aria-label="بحث في الخدمات"><div class="filters" role="group" aria-label="الجهات"><button class="chip" aria-pressed="true" data-ent="all">الكل (${SVC.length})</button>${ENT.map((e, i) => `<button class="chip" aria-pressed="false" data-ent="${i}">${e.n} (${SVC.filter(s => s.e === i).length})</button>`).join('')}</div></div><p class="muted" id="svc-count" role="status"></p><div class="grid grid--3 grid--svcs" id="svc-grid">${SVC.map((s, i) => C.SvcCard(s, i)).join('')}</div><p class="empty" id="svc-empty" hidden>لا توجد خدمة مطابقة. اكتب لنا عبر واتساب وسنساعدك في تحديد الخدمة.</p>`).replace('class="container"', 'class="container container--dir"'),
+  C.Section(C.CTAReal(), 'sec--flush-top')
+];
+
+REAL_T.entity = () => {
+  const ei = Math.min(+qp('e') || 0, ENT.length - 1), e = ENT[ei], list = SVC.map((s, i) => [s, i]).filter(([s]) => s.e === ei);
+  document.title = `${e.n} | توضيح المعرفة لخدمات الأعمال`;
+  return [C.PHeadReal(`خدمات ${e.n}`, `${list.length} ${list.length > 10 ? 'خدمة' : 'خدمات'} نساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.`, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n]]),
+    C.Section(`<div class="detail"><div><input class="search search--wide" id="svc-q" type="search" placeholder="ابحث عن خدمة في ${e.n}" aria-label="بحث"><p class="muted" id="svc-count" role="status"></p><div class="grid grid--svc grid--svcs" id="svc-grid">${list.map(([s, i]) => C.SvcCard(s, i, false)).join('')}</div><p class="empty" id="svc-empty" hidden>لا توجد خدمة مطابقة لبحثك.</p></div>${C.Side('تحتاج خدمة من ' + e.n + '؟', 'تواصل مع فريق توضيح المعرفة وحدد الإجراء الذي تحتاجه، وسنساعدك في مراجعة المتطلبات والمستندات اللازمة.', `أرغب في الاستفسار عن خدمات ${e.n}`)}</div>`).replace('class="container"', 'class="container container--wide"'),
+    C.Section(C.CTAReal(), 'sec--flush-top')];
+};
+
+REAL_T.detail = () => {
+  const i = Math.min(+qp('s') || 0, SVC.length - 1), s = SVC[i], e = ENT[s.e], rel = SVC.map((x, k) => [x, k]).filter(([x, k]) => x.e === s.e && k !== i).slice(0, 6);
+  document.title = `${s.n} | توضيح المعرفة لخدمات الأعمال`;
+  return [C.PHeadReal(s.n, s.d, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n, entHref(s.e)], [s.n]]),
+    C.Section(`<div class="detail"><div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}<div class="card card--real" style="padding:24px"><h2 class="h2s">عن الخدمة</h2><p>${s.d}</p><dl class="dl"><dt>الجهة</dt><dd><a href="${entHref(s.e)}">${e.n}</a></dd></dl></div>
+      <div class="card card--real" style="padding:24px;margin-top:16px"><h2 class="h2s">كيف نساعدك في هذه الخدمة؟</h2><ul class="ticks">${['نراجع احتياج منشأتك ونحدد الإجراء المناسب', 'نوضح لك المتطلبات والمستندات المطلوبة قبل البدء', 'نتابع الطلب عبر القنوات الرسمية ونبلغك بالنتيجة'].map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul><p class="muted" style="margin-top:12px">تختلف المتطلبات والمدة بحسب نشاط المنشأة وشروط الجهة. نوضح لك التفاصيل بعد مراجعة طلبك.</p></div>
+      ${rel.length ? `<h2 class="h2s" style="margin:32px 0 14px">خدمات أخرى من ${e.n}</h2><div class="grid grid--svc">${rel.map(([x, k]) => C.SvcCard(x, k, false)).join('')}</div>` : ''}</div>${C.Side('اطلب هذه الخدمة', 'أرسل لنا طلبك عبر واتساب وسنراجع احتياجك ونوضح لك الخطوات.', `أرغب في خدمة: ${s.n} (${e.n})`)}</div>`).replace('class="container"', 'class="container container--wide"'),
+    C.Section(C.CTAReal(), 'sec--flush-top')];
+};
+REAL_T.platform = REAL_T.entity;
+REAL_T.incorporate = () => REAL_T.detail();
+
+window.REAL_BIND = () => {
+  const grid = document.getElementById('svc-grid'); if (!grid) return;
+  const q = document.getElementById('svc-q'), cnt = document.getElementById('svc-count'), none = document.getElementById('svc-empty'), cards = [...grid.children];
+  let ent = 'all';
+  const run = () => { const t = q.value.trim(); let n = 0; cards.forEach(c => { const ok = (ent === 'all' || c.dataset.e === ent) && (!t || c.dataset.q.includes(t)); c.hidden = !ok; if (ok) n++; }); cnt.textContent = `عرض ${n} من ${cards.length} خدمة`; none.hidden = n > 0; };
+  q.addEventListener('input', run);
+  document.querySelectorAll('[data-ent]').forEach(b => b.addEventListener('click', () => { ent = b.dataset.ent; document.querySelectorAll('[data-ent]').forEach(x => x.setAttribute('aria-pressed', x === b)); run(); }));
+  run();
+};
