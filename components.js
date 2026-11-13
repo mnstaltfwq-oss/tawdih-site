@@ -10,11 +10,11 @@ C.Header = (active = '') => `
   <button class="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="القائمة">☰</button>
   <div class="scrim" data-scrim></div>
   <nav class="nav" id="nav" aria-label="التنقل الرئيسي"><div class="drawer-head"><button class="drawer-x" aria-label="إغلاق" data-close>×</button></div>
-    ${[['index.html', 'الرئيسية'], ['about.html', 'عن الشركة']].map(([h, t]) => `<div class="nav__item"><a class="nav__link" href="${h}" ${active === h ? 'aria-current="page"' : ''}>${t}</a></div>`).join('')}
-    <div class="nav__item"><button class="nav__link" aria-haspopup="true" aria-expanded="false">قائمة منسدلة ▾</button>
-      <div class="dd">${rep(10, i => `<a href="entity.html">عنصر ${i + 1}</a>`)}</div></div>
-    ${[['packages.html', 'الباقات'], ['services.html', 'الدليل'], ['contact.html', 'التواصل']].map(([h, t]) => `<div class="nav__item"><a class="nav__link" href="${h}" ${active === h ? 'aria-current="page"' : ''}>${t}</a></div>`).join('')}
-  <div class="drawer-foot"><a class="btn btn--primary" href="contact.html">زر</a><a class="drawer-call" href="contact.html" aria-label="اتصال"></a></div></nav>
+    ${[['index.html', 'الرئيسية'], ['about.html', 'من نحن']].map(([h, t]) => `<div class="nav__item"><a class="nav__link" href="${h}" ${active === h ? 'aria-current="page"' : ''}>${t}</a></div>`).join('')}
+    <div class="nav__item"><button class="nav__link" aria-haspopup="true" aria-expanded="false">الخدمات ▾</button>
+      <div class="dd">${["المركز السعودي للأعمال","وزارة التجارة","وزارة الموارد البشرية","وزارة الاستثمار","وزارة البلديات والإسكان","التأمينات الاجتماعية","هيئة الزكاة والضريبة والجمارك","وزارة الداخلية","وزارة الخارجية","وزارة الصناعة والثروة المعدنية","الهيئة السعودية للملكية الفكرية","تأسيس الشركات والمنشآت"].map(x => `<a href="entity.html">${x}</a>`).join("")}</div></div>
+    ${[['packages.html', 'الباقات'], ['services.html', 'جميع الخدمات'], ['blog.html', 'مركز المعرفة'], ['contact.html', 'تواصل معنا']].map(([h, t]) => `<div class="nav__item"><a class="nav__link" href="${h}" ${active === h ? 'aria-current="page"' : ''}>${t}</a></div>`).join('')}
+  <div class="drawer-foot"><a class="btn btn--primary" href="https://wa.me/966535448100" target="_blank" rel="noopener">اطلب عبر واتساب</a><a class="drawer-call" href="tel:+966535448100" aria-label="اتصال"></a></div></nav>
   <a class="btn btn--primary btn--sm" href="https://wa.me/966535448100" target="_blank" rel="noopener">اطلب عبر واتساب</a>
 </div></header>`;
 

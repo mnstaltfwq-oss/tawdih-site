@@ -1,15 +1,16 @@
 /* Page templates + interactions */
 const T = {
   home: () => [C.Hero(), C.StatisticsPanel(),
-    C.Section(C.SectionHeading() + C.EntityGrid(12), 'hx-996'),
-    C.Section(C.ConsultationLayout(), 'hx-605'),
-    C.Section(C.SectionHeading() + C.FeaturesGrid(), 'sec--alt hx-395'),
-    C.Section(C.SectionHeading() + C.ProcessSteps(), 'hx-501'),
-    C.Section(C.SectionHeading() + `<div class="logos">${rep(10, () => `<div class="ph" style="height:84px"></div>`)}</div><div class="swiper-dots"><i></i><i></i></div>`, 'hx-321'),
-    C.Section(C.SectionHeading() + `<div class="tlist">${rep(4, C.TestimonialWide)}</div>`, 'sec--alt hx-1179'),
-    C.Section(C.SectionHeading() + `<div class="faq faq--side"><div>${rep(9, () => `<details class="acc"><summary><span class="ph-line" style="width:70%;margin:0"></span></summary><div class="in">${C.lines(3)}</div></details>`)}</div><aside class="card" style="height:240px">${C.lines(4)}<a class="btn btn--primary" href="contact.html">زر</a></aside></div>`, 'hx-991'),
-    C.Section(C.SectionHeading() + `<div class="grid grid--3">${rep(3, i => C.ArticleCard(i).replace('card--article','card--article card--article-sm'))}</div>`, 'sec--alt hx-544'),
-    C.Section(C.CTASection(), 'sec--flush-top')],
+    C.Section(C.SH('خدمات الأعمال', 'خدمات الجهات الحكومية لمنشأتك', 'بدل التنقل بين المنصات والجهات الحكومية، اختر الخدمة التي تحتاجها، ودع فريق توضيح المعرفة يساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.') + C.GovGrid() + '<div style="text-align:center;margin-top:28px"><a class="btn btn--primary" href="services.html">استعرض جميع الخدمات</a></div>', 'hx-996'),
+    C.Section(C.ConsultReal(), 'hx-605'),
+    C.Section(C.SH('', 'لماذا تختار توضيح المعرفة لإدارة إجراءات منشأتك؟') + C.WhyReal(), 'sec--alt hx-395'),
+    C.Section(C.SH('آلية العمل', 'أربع خطوات واضحة من طلب الخدمة حتى إتمامها', 'نعمل معك بخطوات منظمة تبدأ بفهم احتياج منشأتك، ثم مراجعة المتطلبات، ومتابعة تنفيذ الإجراء، وإبلاغك بالنتيجة.') + C.StepsReal(), 'hx-501'),
+    C.Section(C.SH('عملاؤنا', 'شراكات أعمال نبنيها على الثقة والمتابعة', 'نعمل على مساعدة المنشآت ورواد الأعمال في تنظيم إجراءاتهم الحكومية، وتقديم خدمات واضحة تدعم استمرارية أعمالهم.') + C.ClientsReal(), 'hx-321'),
+    C.Section(C.SH('تجارب العملاء', 'ماذا يقول عملاؤنا عن خدماتنا؟', 'نعتز بثقة عملائنا، ونسعى إلى تقديم تجربة عمل تتميز بوضوح الإجراءات وحسن التواصل والمتابعة.') + C.TestiReal(), 'sec--alt hx-1179'),
+    C.Section('<div id="faq"></div>' + C.SH('الأسئلة الشائعة', 'إجابات تساعدك قبل طلب الخدمة') + C.FaqReal(), 'hx-991'),
+    C.Section(C.SH('مركز المعرفة', 'معلومات تساعدك في إدارة أعمال منشأتك', 'تعرّف على إجراءات الخدمات الحكومية والتحديثات التنظيمية والموضوعات التي تهم أصحاب المنشآت ورواد الأعمال والمستثمرين في المملكة العربية السعودية.') + C.ArticlesReal(), 'sec--alt hx-544'),
+    C.Section(C.CTAReal(), 'sec--flush-top'),
+    C.Section(C.RequestForm(), 'sec--alt')],
   directory: () => [C.PageHead(), C.Section(`<div class="filters" role="group" aria-label="تصنيفات">${rep(5, i => `<button class="chip" aria-pressed="${i === 0}" data-filter>تصنيف ${i + 1}</button>`)}</div>${C.EntityGrid(11)}`).replace('class="container"','class="container container--dir"'),
     C.Section(C.SectionHeading() + `<div class="grid grid--4">${rep(8, C.PlatformCard)}</div>`, 'sec--alt'), C.Section(C.FAQAccordion())],
   entity: () => [C.EntityHead(), C.Section(`<div class="detail"><div><div class="sh"><div class="ph-line ph-line--title"></div></div><div class="grid grid--svc">${rep(9, C.ServiceCard)}</div>${C.FAQAccordion(4).replace('class="faq"','class="faq" style="grid-template-columns:1fr;margin-top:40px"')}</div>${C.StickySidebar()}</div>`, '').replace('class="container"','class="container container--wide"'), C.Section(C.CTASection(), 'sec--flush-top')],
@@ -57,6 +58,6 @@ function bind() {
     s.querySelector('[data-next]').onclick = () => step(1); s.querySelector('[data-prev]').onclick = () => step(-1); });
   document.querySelectorAll('form').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); let ok = true;
     f.querySelectorAll('[required]').forEach(i => { const bad = !i.value.trim(); i.closest('.field').classList.toggle('has-error', bad); ok = ok && !bad; });
-    if (ok) f.querySelector('button[type=submit]').textContent = '✓'; }));
+    if (ok && f.hasAttribute('data-wa')) { const v = n => (f.elements[n].value || '').trim(); const t = `طلب استشارة من الموقع\nالاسم: ${v('name')}\nالمنشأة: ${v('co')}\nالجوال: ${v('tel')}\nالجهة: ${v('gov')}\nالخدمة: ${v('svc')}\nالتفاصيل: ${v('msg')}`; window.open('https://wa.me/966535448100?text=' + encodeURIComponent(t), '_blank', 'noopener'); f.querySelector('.form-ok').hidden = false; } else if (ok) f.querySelector('button[type=submit]').textContent = '✓'; }));
 }
 window.mount = mount;
