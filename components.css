@@ -337,3 +337,9 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .soon{align-self:flex-start;margin-top:auto;padding:2px 12px;border-radius:999px;background:#e8f0f8;color:var(--c-muted);font:700 12px/1.8 var(--font-h)}
 .card--soon .ph{opacity:.6}.card--art[hidden]{display:none}
 .art-ul{list-style:disc}
+
+/* article extras */
+.art-body .h3s{font-family:var(--font-h);font-size:18px;color:var(--c-primary);margin:22px 0 6px}
+.art-ol{list-style:decimal;padding-inline-start:24px;margin:10px 0 16px}
+.art-ol li{margin:6px 0;line-height:1.9}
+.art-cta{margin:28px 0 8px;padding:18px 20px;border-radius:12px;background:var(--c-surface);border-inline-start:4px solid var(--c-teal);font-weight:700;color:var(--c-primary);line-height:1.9}
