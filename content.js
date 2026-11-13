@@ -176,3 +176,24 @@ window.REAL_BIND = () => {
   document.querySelectorAll('[data-ent]').forEach(b => b.addEventListener('click', () => { ent = b.dataset.ent; document.querySelectorAll('[data-ent]').forEach(x => x.setAttribute('aria-pressed', x === b)); run(); }));
   run();
 };
+
+/* ---- articles (articles.js) ---- */
+const artHref = a => `article.html?a=${a.id}`;
+C.ArtCard = a => { const live = !!a.body; const inner = `<div class="ph"></div><div class="body"><div class="eyebrow">${a.cat}</div><h3>${a.t}</h3><p>${a.d}</p>${live ? `<span class="more">اقرأ المقال ${C.ico('arr', 18)}</span>` : '<span class="soon">قريباً</span>'}</div>`; return live ? `<a class="card card--article card--real card--art" href="${artHref(a)}" data-cat="${a.cat}">${inner}</a>` : `<div class="card card--article card--real card--art card--soon" data-cat="${a.cat}">${inner}</div>`; };
+C.ArticlesReal = () => `<div class="grid grid--3">${ART.slice(0, 3).map(C.ArtCard).join('')}</div><div style="text-align:center;margin-top:28px"><a class="btn btn--outline" href="blog.html">استعرض جميع المقالات</a></div>`;
+REAL_T.blog = () => { const cats = [...new Set(ART.map(a => a.cat))]; return [
+  C.PHeadReal('مركز المعرفة', 'معلومات تساعدك في إدارة أعمال منشأتك: إجراءات الخدمات الحكومية، والتحديثات التنظيمية، وموضوعات تهم أصحاب المنشآت ورواد الأعمال والمستثمرين.', [['الرئيسية', 'index.html'], ['مركز المعرفة']]),
+  C.Section(`<div class="filters" role="group" aria-label="التصنيفات"><button class="chip" aria-pressed="true" data-cat="all">الكل</button>${cats.map(c => `<button class="chip" aria-pressed="false" data-cat="${c}">${c}</button>`).join('')}</div><div class="grid grid--3 grid--arts" id="art-grid">${ART.map(C.ArtCard).join('')}</div>`).replace('class="container"', 'class="container container--dir"'),
+  C.Section(C.CTAReal(), 'sec--flush-top')]; };
+REAL_T.article = () => {
+  const a = ART.find(x => x.id === qp('a')) || ART.find(x => x.body) || ART[0];
+  document.title = `${a.t} | توضيح المعرفة لخدمات الأعمال`;
+  const rel = ART.filter(x => x !== a && x.body).slice(0, 3);
+  const body = a.body ? a.body.map(([k, v]) => k === 'h' ? `<h2 class="h2s">${v}</h2>` : k === 'ul' ? `<ul class="art-ul">${v.map(x => `<li>${x}</li>`).join('')}</ul>` : `<p>${v}</p>`).join('') : `<p>هذا المقال قيد الإعداد وسيُنشر قريباً.</p>`;
+  return [C.PHeadReal(a.t, a.d, [['الرئيسية', 'index.html'], ['مركز المعرفة', 'blog.html'], [a.cat]]),
+    C.Section(`<div class="detail detail--article"><article class="art-body">${a.date ? `<div class="muted">${a.date}</div>` : ''}${body}${a.src && a.src.length ? `<h2 class="h2s">المصادر</h2><ul class="art-ul">${a.src.map(([n, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${n}</a></li>`).join('')}</ul>` : ''}<p class="art-note">المعلومات الواردة في هذا المقال للتعريف العام، وتختلف المتطلبات بحسب نشاط المنشأة وتحديثات الجهة المختصة. للتأكد من وضع منشأتك تواصل معنا.</p></article>${C.Side('هل تحتاج مساعدة في إجراءات منشأتك؟', 'تواصل مع فريق توضيح المعرفة وسنوضح لك المتطلبات والخطوات المناسبة.', `أرغب في الاستفسار بخصوص: ${a.t}`)}</div>`).replace('class="container"', 'class="container container--wide"'),
+    rel.length ? C.Section(C.SH('مركز المعرفة', 'مقالات ذات صلة') + `<div class="grid grid--3">${rel.map(C.ArtCard).join('')}</div>`, 'sec--alt') : '',
+    C.Section(C.CTAReal(), 'sec--flush-top')];
+};
+const _rb = window.REAL_BIND;
+window.REAL_BIND = () => { _rb && _rb(); const g = document.getElementById('art-grid'); if (!g) return; document.querySelectorAll('[data-cat]').forEach(b => { if (b.tagName !== 'BUTTON') return; b.addEventListener('click', () => { document.querySelectorAll('button[data-cat]').forEach(x => x.setAttribute('aria-pressed', x === b)); [...g.children].forEach(c => c.hidden = b.dataset.cat !== 'all' && c.dataset.cat !== b.dataset.cat); }); }); };

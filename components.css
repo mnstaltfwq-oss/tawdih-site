@@ -330,3 +330,10 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .side__phone{display:flex;align-items:center;gap:8px;color:var(--c-muted);font-weight:700}
 .grid--svcs{align-items:stretch}.grid--svc .card--svc{min-height:0}
 @media (max-width:767px){.phead--real h1{font-size:26px}}
+/* ---- articles ---- */
+.art-body{min-width:0;max-width:720px}.art-body p{font-size:17px;line-height:2;margin:0 0 14px;color:var(--c-ink)}.art-body .h2s{margin:28px 0 10px}
+.art-ul{margin:0 0 16px;padding-inline-start:22px;display:grid;gap:6px;font-size:17px;line-height:1.9}.art-ul a{color:var(--c-link);text-decoration:underline}
+.art-note{padding:14px 16px;border-radius:12px;background:var(--c-surface);color:var(--c-muted)!important;font-size:14px!important;margin-top:28px!important}
+.soon{align-self:flex-start;margin-top:auto;padding:2px 12px;border-radius:999px;background:#e8f0f8;color:var(--c-muted);font:700 12px/1.8 var(--font-h)}
+.card--soon .ph{opacity:.6}.card--art[hidden]{display:none}
+.art-ul{list-style:disc}
