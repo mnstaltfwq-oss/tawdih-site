@@ -197,3 +197,11 @@ REAL_T.article = () => {
 };
 const _rb = window.REAL_BIND;
 window.REAL_BIND = () => { _rb && _rb(); const g = document.getElementById('art-grid'); if (!g) return; document.querySelectorAll('[data-cat]').forEach(b => { if (b.tagName !== 'BUTTON') return; b.addEventListener('click', () => { document.querySelectorAll('button[data-cat]').forEach(x => x.setAttribute('aria-pressed', x === b)); [...g.children].forEach(c => c.hidden = b.dataset.cat !== 'all' && c.dataset.cat !== b.dataset.cat); }); }); };
+
+/* Packages page */
+C.PkgCard = p => `<article class="card card--real pkg${p.feat ? ' pkg--feat' : ''}">${p.feat ? '<span class="pkg__badge">الأكثر طلباً</span>' : ''}<h3>${p.n}</h3><p class="pkg__tag">${p.tag}</p><p>${p.d}</p><div class="pkg__aud"><b>الفئة المستهدفة</b><span>${p.aud}</span></div><div class="pkg__svc"><b>الخدمات المشمولة</b>${p.g.map(([t, l]) => `${t ? `<h4>${t}</h4>` : ''}<ul class="art-ul pkg__ul">${l.map(x => `<li>${x}</li>`).join('')}</ul>`).join('')}</div><div class="pkg__type"><b>نوع الباقة</b><span>${p.type}</span></div><a class="btn ${p.feat ? 'btn--primary' : 'btn--outline'}" href="${WA}?text=${encodeURIComponent(p.wa)}" target="_blank" rel="noopener">${p.btn}</a></article>`;
+REAL_T.packages = () => [
+  C.PHeadReal('باقات إدارة المنصات الحكومية', 'ثلاث باقات مصممة لتناسب مرحلة منشأتك، من التأسيس حتى الإدارة المستمرة.', [['الرئيسية', 'index.html'], ['الباقات']]),
+  C.Section(`${C.SH('', 'حلول متكاملة لكل مرحلة من مراحل أعمالك', 'سواء كنت تبدأ مشروعك أو تطوّر أعمال منشأتك أو تبحث عن إدارة مستمرة لمنصاتك الحكومية، نقدم لك ثلاث باقات مصممة لتناسب احتياجات منشأتك وتساعدك على تنظيم إجراءاتها ومتابعتها.')}<div class="grid grid--3 grid--pkg">${PKG.map(C.PkgCard).join('')}</div>`),
+  C.Section(C.CTAReal(), 'sec--flush-top')
+];
