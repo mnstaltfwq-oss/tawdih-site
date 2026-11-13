@@ -10,7 +10,12 @@ const ICO = {
   doc: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
   clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   chat: '<path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.7-5.4A8.4 8.4 0 1 1 21 11.5z"/>',
-  pin: '<path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>'
+  cal: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17"/>',
+  calchk: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17m-11 5 2 2 4-4"/>',
+  layers: '<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5M3 17.5l9 5 9-5"/>',
+  star: '<path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 17l-5.2 2.7 1-5.9L3.5 9.7l5.9-.8z"/>',
+  pin: '<path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  pin_: '<path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/>'
 };
 C.ico = (n, s = 24) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICO[n]}</svg>`;
 const wab = (t, cls = 'btn--primary') => `<a class="btn ${cls}" href="${WA}" target="_blank" rel="noopener">${t}</a>`;
@@ -111,3 +116,12 @@ ${col('روابط سريعة', [['الرئيسية', 'index.html'], ['من نح�
 <div class="footer__bar"><span>© 2026 شركة توضيح المعرفة لخدمات الأعمال. جميع الحقوق محفوظة.</span></div></div></footer>
 <div class="float"><a class="wa" href="${WA}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">${C.ico('chat', 22)}</a><i aria-hidden="true"></i></div><button class="totop" aria-label="للأعلى"></button><div class="mobile-cta">${wab('اطلب عبر واتساب')}</div>`;
 };
+
+C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="img" aria-label="مكتب أعمال مع أفق مدينة الرياض"></div><div class="hero__wrap"><div class="hero__content">
+<div class="hero__chip"><span class="hero__chip-ico">${C.ico('clock', 22)}</span>أعمالك تستحق وقتك.. وإجراءاتها علينا</div>
+<h1>خدمات منشأتك الحكومية<br><span class="hl">في مكان واحد</span></h1>
+<p>من تأسيس الشركات وإصدار التراخيص إلى إدارة شؤون الموظفين والمنصات الحكومية، نساعدك في إنجاز إجراءات منشأتك ومتابعتها بخطوات واضحة ومنظمة.</p>
+<div class="hero__actions"><a class="btn btn--primary" href="${WA}" target="_blank" rel="noopener">اطلب خدمتك الآن ${C.ico('arr', 18)}</a><a class="btn btn--outline" href="services.html">استعرض خدماتنا</a></div>
+<ul class="hero__badges hero__badges--real"><li>${C.ico('calchk', 22)}متابعة منظمة للإجراءات</li><li>${C.ico('shield', 22)}خصوصية بيانات المنشأة</li><li>${C.ico('pin', 22)}نخدم جميع مناطق المملكة</li></ul>
+</div></div></section>`;
+C.StatisticsPanel = () => `<div class="container"><div class="stats stats--real" role="list">${[['cal', '+6', 'سنوات من الخبرة'], ['users', '+250', 'عميل خدمناهم'], ['layers', '+25', 'خدمة أعمال وحلول حكومية'], ['star', '95%', 'نسبة رضا العملاء']].map(([i, n, l]) => `<div class="stats__item" role="listitem"><span class="stats__ico">${C.ico(i, 24)}</span><div><div class="stats__n" dir="ltr">${n}</div><div class="stats__l">${l}</div></div></div>`).join('')}</div></div>`;
