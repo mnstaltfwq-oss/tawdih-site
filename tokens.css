@@ -1,0 +1,30 @@
+/* Design tokens — measured from reference at 1440px; colors are neutral placeholders (no brand) */
+:root{
+  --container:1140px;           /* measured: hero wrap / section width */
+  --gutter:20px;                /* measured: hero wrap side padding */
+  --header-h:78px;              /* measured */
+  --hero-h:523px;               /* measured */
+  --stats-w:1080px;             /* measured */
+  --stats-h:115px;              /* measured */
+  --stats-overlap:34px;         /* measured: hero bottom 601 - stats top 567 */
+  --sec-pad:58px;               /* measured: section vertical padding */
+  --phead-h:231px;              /* measured: inner page header */
+  --r-card:16px; --r-panel:20px; --r-pill:999px; --r-field:12px;
+  --gap-card:16px; --gap-feat:18px; --gap-split:40px; --gap-faq:36px; --gap-foot:32px; --gap-contact:28px;
+  --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-14:58px;
+
+  --c-ink:#172033; --c-muted:#4a5670; --c-line:#d5e0ec; --c-surface:#f4f8fc; --c-bg:#fff;
+  --c-primary:#003090; --c-primary-ink:#fff; --c-accent:#0080e0; --c-hero:#001050;
+  --c-ph:#d5e0ec; /* placeholder media */
+  --shadow-card:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+  --shadow-gold:0 6px 18px rgba(0,0,0,.18);
+  --t-fast:.2s ease; --t-acc:.3s ease;
+  --font:Tajawal,"Segoe UI",Tahoma,sans-serif; --font-h:Cairo,Tajawal,"Segoe UI",Tahoma,sans-serif; --c-teal:#00b0a0; --c-sky:#00b0f0; --c-link:#0066b8;
+
+  /* typography (measured) */
+  --fs-h1:38px; --fs-h2:32px; --lh-h2:46.4px; --fs-kicker:18px; --fs-body:16px; --fs-lead:16.5px; --fs-card-title:16px; --fs-card-text:13px; --fs-feat-title:17px; --fs-stat:30px; --fs-nav:15px; --fs-btn:15px;
+  --fs-h1-inner:38px; --lh-h1-inner:51.3px; --fs-h1-detail:42px; --lh-h1-detail:60.9px; --fs-sub:17px; --lh-sub:30.6px; --fs-crumb:14px; --lh-crumb:25.2px;
+  --fs-label:14px; --lh-label:21px; --fs-field:15px; --fs-chip:14px; --fs-th:15px; --fs-td:14px; --fs-summary:16px; --fs-contact-title:17px; --fs-article-title:16px; --lh-article-title:26.4px;
+  /* motion (measured) */
+  --d-btn:.2s; --d-btn-transform:.18s; --d-card:.22s; --d-nav:.15s; --d-dd:.18s; --d-reveal:.85s; --ease-reveal:cubic-bezier(.2,.7,.2,1); /* reveal easing partially truncated in DevTools [ت] */
+}
