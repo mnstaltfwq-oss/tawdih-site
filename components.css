@@ -319,7 +319,7 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .crumb--real{height:auto;margin:0 0 8px;font-size:14px;color:#b8c6e0;flex-wrap:wrap}.crumb--real a{color:#b8c6e0}.crumb--real a:hover{color:#fff}
 .tag{display:inline-block;align-self:flex-start;padding:2px 12px;border-radius:999px;background:#e0f5f2;color:#00786e;font:700 12px/1.8 var(--font-h)}
 .card--svc{transition:box-shadow .2s,transform .2s}.card--svc:hover{box-shadow:var(--shadow-card);transform:translateY(-3px)}
-.card--svc h3{font-size:17px}.svc__ent{color:var(--c-link);font-size:13px;font-weight:700}.card--svc p{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.card--svc h3{font-size:17px}.svc__ent{color:var(--c-link);font-size:13px;font-weight:700}.card--svc p{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .card--svc .more{margin-top:auto;padding-top:8px;display:inline-flex;align-items:center;gap:6px;color:var(--c-link);font-weight:700;font-size:14px}
 .dirbar{display:grid;gap:14px;margin-bottom:12px}.search--wide{width:100%;max-width:520px;height:48px;font-size:16px;margin-bottom:12px}.dirbar .search--wide{margin:0}
 .filters{margin-bottom:12px}.muted{color:var(--c-muted);font-size:14px;margin:0 0 14px}
@@ -356,3 +356,27 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .pkg .btn{margin-top:6px;justify-content:center}
 .pkg--feat{border:2px solid var(--c-accent);box-shadow:0 10px 30px rgba(0,48,144,.12)}
 .pkg__badge{position:absolute;top:-13px;inset-inline-start:20px;background:var(--c-accent);color:#fff;font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px}
+
+/* ---- fit to measured reference (laptop was rendering too large) ---- */
+@media (min-width:1024px){.stats--real .stats__item{height:112px;align-self:center;padding:22px 24px;box-sizing:border-box;gap:12px}}
+.stats__n{font-size:30px}
+.stats__ico{width:44px;height:44px}
+.stats__l{font-size:13.5px;max-width:150px}
+.grid--4>.card--gov.card--real{height:250px!important;padding:18px 20px;gap:7px;overflow:hidden;box-sizing:border-box}
+.grid--4>.card--gov.card--real:nth-child(-n+4){height:252px!important}
+.card--gov .ico{width:42px;height:42px;flex:none}.card--gov .ico svg{width:22px;height:22px}
+.card--gov h3{font-size:17px;line-height:1.45}
+.card--gov p{font-size:14px;line-height:1.7;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.card--gov .more{padding-top:4px}
+@media (max-width:1023px){.grid--4>.card--gov.card--real,.grid--4>.card--gov.card--real:nth-child(-n+4){height:auto!important}.card--gov p{-webkit-line-clamp:unset;display:block}}
+
+/* ---- type scale per measured tokens (h1 38, card title 16 / text 13, feature title 17) ---- */
+.hero--real h1{font-size:38px;line-height:1.4;margin:14px 0 12px}
+.hero--real p{font-size:16.5px;line-height:1.9}
+.card--real h3{font-size:16px}
+.card--feature.card--real h3,.card--step.card--real h3{font-size:17px}
+.card--real p{font-size:14px;line-height:1.75}
+.card--gov h3{font-size:16px}.card--gov p{font-size:13px;line-height:1.75;-webkit-line-clamp:5}
+@media (max-width:1023px){.hero--real h1{font-size:34px}}
+@media (max-width:767px){.hero--real h1{font-size:28px}}
+@media (max-width:1179px){.grid--4>.card--gov.card--real,.grid--4>.card--gov.card--real:nth-child(-n+4){height:auto!important}.card--gov p{display:block;-webkit-line-clamp:unset}}

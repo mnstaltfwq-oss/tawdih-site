@@ -6,7 +6,7 @@
   --hero-h:523px;               /* measured */
   --stats-w:1080px;             /* measured */
   --stats-h:115px;              /* measured */
-  --stats-overlap:34px;         /* measured: hero bottom 601 - stats top 567 */
+  --stats-overlap:44px;         /* measured: stats strip overlaps banner by 44 */
   --sec-pad:58px;               /* measured: section vertical padding */
   --phead-h:231px;              /* measured: inner page header */
   --r-card:16px; --r-panel:20px; --r-pill:999px; --r-field:12px;
