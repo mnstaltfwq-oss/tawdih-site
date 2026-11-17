@@ -163,12 +163,20 @@ REAL_T.entity = () => {
     C.Section(C.CTAReal(), 'sec--flush-top')];
 };
 
+
+const reqBlock = i => {
+  const r = (window.REQ || {})[i];
+  if (!r) return `<div class="card card--real" style="padding:24px;margin-top:16px"><h2 class="h2s">المتطلبات والمستندات</h2><p class="muted">نراجع هذه الخدمة مع الجهة المختصة ونوافيك بمتطلباتها ومستنداتها المحدّثة قبل البدء. تواصل معنا لنوضحها لك الآن.</p></div>`;
+  const ul = a => `<ul class="ticks">${a.map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul>`;
+  const rows = [['قناة التقديم', r.ch], ['الرسوم', r.fee], ['مدة الإنجاز', r.time]].filter(x => x[1]).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
+  return `<div class="card card--real" style="padding:24px;margin-top:16px"><h2 class="h2s">المتطلبات والخطوات</h2><dl class="dl">${rows}</dl>${r.cond.length ? `<h3 class="h3s">الشروط</h3>${ul(r.cond)}` : ''}<h3 class="h3s">المستندات المطلوبة</h3>${r.docs.length ? ul(r.docs) : '<p>لا تشترط الجهة رفع مستندات محددة في هذه الخدمة، وقد تُطلب بيانات إضافية أثناء التقديم.</p>'}<h3 class="h3s">خطوات الخدمة</h3><ol class="art-ol">${r.steps.map(x => `<li>${x}</li>`).join('')}</ol><p class="muted" style="margin-top:12px">المصدر: ${r.src}. قد تتغير المتطلبات، ونراجعها قبل تنفيذ طلبك.</p></div>`;
+};
 REAL_T.detail = () => {
   const i = Math.min(+qp('s') || 0, SVC.length - 1), s = SVC[i], e = ENT[s.e], rel = SVC.map((x, k) => [x, k]).filter(([x, k]) => x.e === s.e && k !== i).slice(0, 6);
   document.title = `${s.n} | توضيح المعرفة لخدمات الأعمال`;
   return [C.PHeadReal(s.n, s.d, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n, entHref(s.e)], [s.n]]),
     C.Section(`<div class="detail"><div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}<div class="card card--real" style="padding:24px"><h2 class="h2s">عن الخدمة</h2><p>${s.d}</p><dl class="dl"><dt>الجهة</dt><dd><a href="${entHref(s.e)}">${e.n}</a></dd></dl></div>
-      <div class="card card--real" style="padding:24px;margin-top:16px"><h2 class="h2s">كيف نساعدك في هذه الخدمة؟</h2><ul class="ticks">${['نراجع احتياج منشأتك ونحدد الإجراء المناسب', 'نوضح لك المتطلبات والمستندات المطلوبة قبل البدء', 'نتابع الطلب عبر القنوات الرسمية ونبلغك بالنتيجة'].map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul><p class="muted" style="margin-top:12px">تختلف المتطلبات والمدة بحسب نشاط المنشأة وشروط الجهة. نوضح لك التفاصيل بعد مراجعة طلبك.</p></div>
+      ${reqBlock(i)}<div class="card card--real" style="padding:24px;margin-top:16px"><h2 class="h2s">كيف نساعدك في هذه الخدمة؟</h2><ul class="ticks">${['نراجع احتياج منشأتك ونحدد الإجراء المناسب', 'نوضح لك المتطلبات والمستندات المطلوبة قبل البدء', 'نتابع الطلب عبر القنوات الرسمية ونبلغك بالنتيجة'].map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul><p class="muted" style="margin-top:12px">تختلف المتطلبات والمدة بحسب نشاط المنشأة وشروط الجهة. نوضح لك التفاصيل بعد مراجعة طلبك.</p></div>
       ${rel.length ? `<h2 class="h2s" style="margin:32px 0 14px">خدمات أخرى من ${e.n}</h2><div class="grid grid--svc">${rel.map(([x, k]) => C.SvcCard(x, k, false)).join('')}</div>` : ''}</div>${C.Side('اطلب هذه الخدمة', 'أرسل لنا طلبك عبر واتساب وسنراجع احتياجك ونوضح لك الخطوات.', `أرغب في خدمة: ${s.n} (${e.n})`)}</div>`).replace('class="container"', 'class="container container--wide"'),
     C.Section(C.CTAReal(), 'sec--flush-top')];
 };
