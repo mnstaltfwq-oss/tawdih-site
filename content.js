@@ -114,7 +114,7 @@ C.Footer = () => {
 ${col('خدماتنا', [['تأسيس الشركات والمنشآت', 'entity.html'], ['خدمات المركز السعودي للأعمال', 'entity.html'], ['خدمات وزارة التجارة', 'entity.html'], ['خدمات وزارة الاستثمار', 'entity.html'], ['خدمات منصة قوى', 'platform.html'], ['خدمات التأمينات الاجتماعية', 'entity.html'], ['خدمات منصة بلدي', 'platform.html'], ['خدمات الزكاة والضريبة', 'entity.html'], ['إدارة المنصات الحكومية', 'packages.html'], ['الاستشارات وخدمات الأعمال', 'consult.html']])}
 ${col('روابط سريعة', [['الرئيسية', 'index.html'], ['من نحن', 'about.html'], ['جميع الخدمات', 'services.html'], ['باقات إدارة المنصات الحكومية', 'packages.html'], ['مركز المعرفة', 'blog.html'], ['الأسئلة الشائعة', 'index.html#faq'], ['تواصل معنا', 'contact.html'], ['سياسة الخصوصية', '#'], ['الشروط والأحكام', '#']])}
 <div><h3>تواصل معنا</h3><ul class="footer__contact"><li>${C.ico('bld', 18)}شركة توضيح المعرفة لخدمات الأعمال</li><li>${C.ico('pin', 18)}المقر: حائل، المملكة العربية السعودية</li><li>${C.ico('grid', 18)}نطاق العمل: جميع مناطق المملكة العربية السعودية</li><li>${C.ico('chat', 18)}<a href="${WA}" dir="ltr">0535448100</a></li></ul>${wab('تواصل معنا عبر واتساب', 'btn--wa')}</div></div>
-<div class="footer__bar"><span>© 2026 شركة توضيح المعرفة لخدمات الأعمال. جميع الحقوق محفوظة.</span></div></div></footer>
+<div class="footer__bar"><span>© 2026 شركة توضيح المعرفة لخدمات الأعمال. جميع الحقوق محفوظة.</span><span class="logos-note">شعارات الجهات والمنصات الحكومية تعود لأصحابها، وتُعرض للدلالة على الخدمات فقط، ولا تعني تبعية توضيح المعرفة لها أو تمثيلها.</span></div></div></footer>
 <div class="float"><a class="wa" href="${WA}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">${C.ico('chat', 22)}</a><i aria-hidden="true"></i></div><button class="totop" aria-label="للأعلى"></button><div class="mobile-cta">${wab('اطلب عبر واتساب')}</div>`;
 };
 
@@ -134,10 +134,15 @@ const waTxt = s => `${WA}?text=${encodeURIComponent(s)}`;
 const entHref = i => `entity.html?e=${i}`;
 const svcHref = i => `service-detail.html?s=${i}`;
 const entIdx = pre => { const i = ENT.findIndex(e => e.n.startsWith(pre)); return i < 0 ? 0 : i; };
+/* Official logos (flat files lg-*). Only grade A/B logos from the supplied pack; null = no verified logo yet (icon shown). dark:true = white logo, needs dark tile. */
+const LG = { hrsd: 'lg-hrsd.svg', misa: 'lg-misa.svg', momah: 'lg-momah.svg', mim: 'lg-mim.png', mofa: 'lg-mofa.svg', mot: 'lg-mot.svg', zatca: 'lg-zatca.svg', balady: 'lg-balady.svg', najiz: 'lg-najiz.svg', hrdf: 'lg-hrdf.svg', spl: 'lg-spl.svg', saip: 'lg-saip.svg', business: 'lg-business.svg', muqeem: 'lg-muqeem.png' };
+const ENT_LOGO = [null, 'hrsd', 'mim', 'balady', null, 'zatca', 'muqeem', 'misa', null, 'hrdf', null, 'najiz', 'mofa', 'mot', 'saip', 'spl'];
+const GOV_LOGO = ['business', null, 'hrsd', 'misa', 'momah', null, 'zatca', 'muqeem', 'mofa', 'mim', 'saip', null];
+const logoTile = (k, alt) => k ? `<span class="logo-tile${k === 'business' ? ' logo-tile--dark' : ''}"><img src="${LG[k]}" alt="شعار ${alt}" loading="lazy"></span>` : '';
 const GOV_MAP = ['وزارة التجارة', 'وزارة التجارة', 'وزارة الموارد البشرية', 'وزارة الاستثمار', 'وزارة البلديات', 'المؤسسة العامة للتأمينات', 'هيئة الزكاة', 'وزارة الداخلية', 'وزارة الخارجية', 'وزارة الصناعة', 'الهيئة السعودية للملكية', 'وزارة التجارة'];
-C.GovCard = ([t, d, b = 'عرض الخدمات'], i) => `<a class="card card--real card--gov" href="${entHref(entIdx(GOV_MAP[i]))}"><span class="ico">${C.ico('bld')}</span><h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
+C.GovCard = ([t, d, b = 'عرض الخدمات'], i) => `<a class="card card--real card--gov" href="${entHref(entIdx(GOV_MAP[i]))}">${logoTile(GOV_LOGO[i], t) || `<span class="ico">${C.ico('bld')}</span>`}<h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
 
-C.PHeadReal = (title, sub, crumbs) => `<section class="phead phead--real"><div class="container"><nav class="crumb crumb--real" aria-label="مسار الصفحة">${crumbs.map(([t, h]) => h ? `<a href="${h}">${t}</a><span>/</span>` : `<span>${t}</span>`).join('')}</nav><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ''}</div></section>`;
+C.PHeadReal = (title, sub, crumbs, logo) => `<section class="phead phead--real"><div class="container">${logo ? logoTile(logo, title).replace('logo-tile', 'logo-tile phead__logo') : ''}<nav class="crumb crumb--real" aria-label="مسار الصفحة">${crumbs.map(([t, h]) => h ? `<a href="${h}">${t}</a><span>/</span>` : `<span>${t}</span>`).join('')}</nav><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ''}</div></section>`;
 C.SvcCard = (s, i, showEnt = true) => `<a class="card card--real card--svc" href="${svcHref(i)}" data-e="${s.e}" data-q="${(s.n + ' ' + s.d + ' ' + ENT[s.e].n).replace(/"/g, '')}">${tagCls(s.t)}<h3>${s.n}</h3>${showEnt ? `<div class="svc__ent">${ENT[s.e].n}</div>` : ''}<p>${s.d}</p><span class="more">تفاصيل الخدمة ${C.ico('arr', 18)}</span></a>`;
 C.Side = (title, text, msg) => `<aside class="sidebar"><div class="card card--real"><h3>${title}</h3><p>${text}</p>${wab('اطلب الخدمة عبر واتساب').replace(WA, waTxt(msg))}<div class="side__phone">${C.ico('chat', 18)}<span dir="ltr">0535448100</span></div></div></aside>`;
 
@@ -150,7 +155,7 @@ REAL_T.directory = () => [
 REAL_T.entity = () => {
   const ei = Math.min(+qp('e') || 0, ENT.length - 1), e = ENT[ei], list = SVC.map((s, i) => [s, i]).filter(([s]) => s.e === ei);
   document.title = `${e.n} | توضيح المعرفة لخدمات الأعمال`;
-  return [C.PHeadReal(`خدمات ${e.n}`, `${list.length} ${list.length > 10 ? 'خدمة' : 'خدمات'} نساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.`, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n]]),
+  return [C.PHeadReal(`خدمات ${e.n}`, `${list.length} ${list.length > 10 ? 'خدمة' : 'خدمات'} نساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.`, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n]], ENT_LOGO[ei]),
     C.Section(`<div class="detail"><div><input class="search search--wide" id="svc-q" type="search" placeholder="ابحث عن خدمة في ${e.n}" aria-label="بحث"><p class="muted" id="svc-count" role="status"></p><div class="grid grid--svc grid--svcs" id="svc-grid">${list.map(([s, i]) => C.SvcCard(s, i, false)).join('')}</div><p class="empty" id="svc-empty" hidden>لا توجد خدمة مطابقة لبحثك.</p></div>${C.Side('تحتاج خدمة من ' + e.n + '؟', 'تواصل مع فريق توضيح المعرفة وحدد الإجراء الذي تحتاجه، وسنساعدك في مراجعة المتطلبات والمستندات اللازمة.', `أرغب في الاستفسار عن خدمات ${e.n}`)}</div>`).replace('class="container"', 'class="container container--wide"'),
     C.Section(C.CTAReal(), 'sec--flush-top')];
 };
