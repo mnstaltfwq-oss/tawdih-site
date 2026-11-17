@@ -27,7 +27,6 @@ const wab = (t, cls = 'btn--primary') => `<a class="btn ${cls}" href="${WA}" tar
 C.SH = (eb, t, d) => `<div class="sh sh--real">${eb ? `<div class="eyebrow">${eb}</div>` : ''}<h2>${t}</h2>${d ? `<p>${d}</p>` : ''}</div>`;
 
 const GOV = [
-  ['المركز السعودي للأعمال', 'خدمات تأسيس المنشآت والشركات، والسجلات التجارية، والتأكيد السنوي، والتعديلات والإجراءات المرتبطة بالأعمال.'],
   ['وزارة التجارة', 'خدمات الشركات والأنشطة التجارية وتحديث بيانات المنشآت والإجراءات التجارية ذات العلاقة.'],
   ['وزارة الموارد البشرية', 'خدمات منصة قوى وأجير ومدد، وإدارة عقود العمل ورخص العمل والإجراءات المرتبطة بالموظفين.'],
   ['وزارة الاستثمار', 'خدمات المستثمرين الأجانب وتسجيل الاستثمار، ومتابعة الإجراءات والتعديلات المرتبطة بالمنشآت الاستثمارية.'],
@@ -38,7 +37,6 @@ const GOV = [
   ['وزارة الخارجية', 'خدمات التأشيرات وتصديق الوثائق ومتابعة الطلبات والإجراءات المرتبطة بأعمال المنشآت.'],
   ['وزارة الصناعة والثروة المعدنية', 'خدمات التراخيص الصناعية وتحديث بيانات المنشآت الصناعية ومتابعة الإجراءات عبر المنصات المختصة.'],
   ['الهيئة السعودية للملكية الفكرية', 'خدمات تسجيل العلامات التجارية وتجديدها ونقل ملكيتها ومتابعة الطلبات والإجراءات المرتبطة بها.'],
-  ['تأسيس الشركات والمنشآت', 'نساعدك في خطوات تأسيس نشاطك التجاري، بدءًا من تحديد الإجراءات المطلوبة وحتى استكمال خدمات التسجيل والتأسيس.', 'ابدأ التأسيس']
 ];
 C.GovCard = ([t, d, b = 'عرض الخدمات']) => `<a class="card card--real card--gov" href="entity.html"><span class="ico">${C.ico('bld')}</span><h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
 C.GovGrid = () => `<div class="grid grid--4">${GOV.map((g, i) => C.GovCard(g, i)).join('')}</div>`;
@@ -114,14 +112,14 @@ C.Footer = () => {
   const col = (t, items) => `<div><h3>${t}</h3><ul>${items.map(([x, h]) => `<li><a href="${h}">${x}</a></li>`).join('')}</ul></div>`;
   return `<footer class="footer"><div class="container"><div class="footer__grid footer__grid--real">
 <div class="footer__about"><img class="footer__logo" src="logo.png" alt="توضيح المعرفة لخدمات الأعمال" width="150" height="50"><h3>شركة توضيح المعرفة لخدمات الأعمال</h3><p>شركة سعودية تقدم خدمات الأعمال والإجراءات الحكومية للمنشآت ورواد الأعمال والمستثمرين.</p><p>نساعد عملاءنا في خدمات التأسيس والتراخيص والموارد البشرية ومتابعة المنصات الحكومية، عبر حلول منظمة تناسب احتياجات المنشآت.</p><p class="slogan">أعمالك تستحق وقتك.. وإجراءاتها علينا.</p></div>
-${col('خدماتنا', [['تأسيس الشركات والمنشآت', 'entity.html'], ['خدمات المركز السعودي للأعمال', 'entity.html'], ['خدمات وزارة التجارة', 'entity.html'], ['خدمات وزارة الاستثمار', 'entity.html'], ['خدمات منصة قوى', 'platform.html'], ['خدمات التأمينات الاجتماعية', 'entity.html'], ['خدمات منصة بلدي', 'platform.html'], ['خدمات الزكاة والضريبة', 'entity.html'], ['إدارة المنصات الحكومية', 'packages.html'], ['الاستشارات وخدمات الأعمال', 'consult.html']])}
+${col('خدماتنا', [['تأسيس الشركات والمنشآت', 'incorporate.html'], ['خدمات وزارة التجارة', 'entity.html'], ['خدمات وزارة الاستثمار', 'entity.html'], ['خدمات منصة قوى', 'platform.html'], ['خدمات التأمينات الاجتماعية', 'entity.html'], ['خدمات منصة بلدي', 'platform.html'], ['خدمات الزكاة والضريبة', 'entity.html'], ['إدارة المنصات الحكومية', 'packages.html'], ['الاستشارات وخدمات الأعمال', 'consult.html']])}
 ${col('روابط سريعة', [['الرئيسية', 'index.html'], ['من نحن', 'about.html'], ['جميع الخدمات', 'services.html'], ['باقات إدارة المنصات الحكومية', 'packages.html'], ['مركز المعرفة', 'blog.html'], ['الأسئلة الشائعة', 'index.html#faq'], ['تواصل معنا', 'contact.html'], ['سياسة الخصوصية', 'privacy.html'], ['الشروط والأحكام', 'terms.html'], ['سياسة الاسترداد', 'refund.html']])}
-<div><h3>تواصل معنا</h3><ul class="footer__contact"><li>${C.ico('bld', 18)}شركة توضيح المعرفة لخدمات الأعمال</li><li>${C.ico('pin', 18)}المقر: حائل، المملكة العربية السعودية</li><li>${C.ico('grid', 18)}نطاق العمل: جميع مناطق المملكة العربية السعودية</li><li>${C.ico('chat', 18)}<a href="${WA}" dir="ltr">0535448100</a></li></ul>${wab('تواصل معنا عبر واتساب', 'btn--wa')}</div></div>
+<div><h3>تواصل معنا</h3><ul class="footer__contact"><li>${C.ico('bld', 18)}شركة توضيح المعرفة لخدمات الأعمال</li><li>${C.ico('pin', 18)}المقر: حائل، المملكة العربية السعودية</li><li>${C.ico('grid', 18)}نطاق العمل: جميع مناطق المملكة العربية السعودية</li><li>${C.ico('chat', 18)}<a href="${WA}" dir="ltr">0535448100</a></li><li>${C.ico('bld', 18)}السجل التجاري الموحد: <span dir="ltr">7049437895</span></li></ul>${wab('تواصل معنا عبر واتساب', 'btn--wa')}</div></div>
 <div class="footer__bar"><span>© 2026 شركة توضيح المعرفة لخدمات الأعمال. جميع الحقوق محفوظة.</span><span class="logos-note">شعارات الجهات والمنصات الحكومية تعود لأصحابها، وتُعرض للدلالة على الخدمات فقط، ولا تعني تبعية توضيح المعرفة لها أو تمثيلها.</span></div></div></footer>
 <div class="float"><a class="wa" href="${WA}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">${C.ico('chat', 22)}</a><i aria-hidden="true"></i></div><button class="totop" aria-label="للأعلى"></button><div class="mobile-cta">${wab('اطلب عبر واتساب')}</div>`;
 };
 
-C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="img" aria-label="صاحبا منشأة سعودية يراجعان مستندات العمل في مكتب"></div><div class="hero__wrap"><div class="hero__content">
+C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="img" aria-label="مكتب أعمال مع أفق مدينة الرياض"></div><div class="hero__wrap"><div class="hero__content">
 <div class="hero__chip"><span class="hero__chip-ico">${C.ico('clock', 22)}</span>أعمالك تستحق وقتك.. وإجراءاتها علينا</div>
 <h1>خدمات منشأتك الحكومية<br><span class="hl">في مكان واحد</span></h1>
 <p>من تأسيس الشركات وإصدار التراخيص إلى إدارة شؤون الموظفين والمنصات الحكومية، نساعدك في إنجاز إجراءات منشأتك ومتابعتها بخطوات واضحة ومنظمة.</p>
@@ -138,11 +136,11 @@ const entHref = i => `entity.html?e=${i}`;
 const svcHref = i => `service-detail.html?s=${i}`;
 const entIdx = pre => { const i = ENT.findIndex(e => e.n.startsWith(pre)); return i < 0 ? 0 : i; };
 /* Official logos (flat files lg-*). Only grade A/B logos from the supplied pack; null = no verified logo yet (icon shown). dark:true = white logo, needs dark tile. */
-const LG = { hrsd: 'lg-hrsd.svg', misa: 'lg-misa.svg', momah: 'lg-momah.svg', mim: 'lg-mim.png', mofa: 'lg-mofa.svg', mot: 'lg-mot.svg', zatca: 'lg-zatca.svg', balady: 'lg-balady.svg', najiz: 'lg-najiz.svg', hrdf: 'lg-hrdf.svg', spl: 'lg-spl.svg', saip: 'lg-saip.svg', business: 'lg-business.svg', muqeem: 'lg-muqeem.png' };
-const ENT_LOGO = [null, 'hrsd', 'mim', 'balady', null, 'zatca', 'muqeem', 'misa', null, 'hrdf', null, 'najiz', 'mofa', 'mot', 'saip', 'spl'];
-const GOV_LOGO = ['business', null, 'hrsd', 'misa', 'momah', null, 'zatca', 'muqeem', 'mofa', 'mim', 'saip', null];
+const LG = { hrsd: 'lg-hrsd.svg', misa: 'lg-misa.svg', momah: 'lg-momah.svg', mim: 'lg-mim.png', mofa: 'lg-mofa.svg', mot: 'lg-mot.svg', zatca: 'lg-zatca.svg', balady: 'lg-balady.svg', najiz: 'lg-najiz.svg', hrdf: 'lg-hrdf.svg', spl: 'lg-spl.svg', saip: 'lg-saip.svg', business: 'lg-business.svg', muqeem: 'lg-muqeem.png', moc: 'lg-moc.png', gosi: 'lg-gosi.png' };
+const ENT_LOGO = ['moc', 'hrsd', 'mim', 'balady', 'gosi', 'zatca', 'muqeem', 'misa', null, 'hrdf', null, 'najiz', 'mofa', 'mot', 'saip', 'spl'];
+const GOV_LOGO = ['moc', 'hrsd', 'misa', 'momah', 'gosi', 'zatca', 'muqeem', 'mofa', 'mim', 'saip'];
 const logoTile = (k, alt) => k ? `<span class="logo-tile${k === 'business' ? ' logo-tile--dark' : ''}"><img src="${LG[k]}" alt="شعار ${alt}" loading="lazy"></span>` : '';
-const GOV_MAP = ['وزارة التجارة', 'وزارة التجارة', 'وزارة الموارد البشرية', 'وزارة الاستثمار', 'وزارة البلديات', 'المؤسسة العامة للتأمينات', 'هيئة الزكاة', 'وزارة الداخلية', 'وزارة الخارجية', 'وزارة الصناعة', 'الهيئة السعودية للملكية', 'وزارة التجارة'];
+const GOV_MAP = ['وزارة التجارة', 'وزارة الموارد البشرية', 'وزارة الاستثمار', 'وزارة البلديات', 'المؤسسة العامة للتأمينات', 'هيئة الزكاة', 'وزارة الداخلية', 'وزارة الخارجية', 'وزارة الصناعة', 'الهيئة السعودية للملكية'];
 C.GovCard = ([t, d, b = 'عرض الخدمات'], i) => `<a class="card card--real card--gov" href="${entHref(entIdx(GOV_MAP[i]))}">${logoTile(GOV_LOGO[i], t) || `<span class="ico">${C.ico('bld')}</span>`}<h3>${t}</h3><p>${d}</p><span class="more">${b} ${C.ico('arr', 18)}</span></a>`;
 
 C.PHeadReal = (title, sub, crumbs, logo) => `<section class="phead phead--real"><div class="container">${logo ? logoTile(logo, title).replace('logo-tile', 'logo-tile phead__logo') : ''}<nav class="crumb crumb--real" aria-label="مسار الصفحة">${crumbs.map(([t, h]) => h ? `<a href="${h}">${t}</a><span>/</span>` : `<span>${t}</span>`).join('')}</nav><h1>${title}</h1>${sub ? `<p>${sub}</p>` : ''}</div></section>`;
