@@ -295,7 +295,7 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 
 /* ---- hero + stats (design from banner) ---- */
 .hero--real{background:linear-gradient(115deg,#f6f9fe 30%,#e4eefb);color:var(--c-hero)}
-.hero--real .hero__photo{position:absolute;inset:0 auto 0 0;width:50%;background:url("hero-photo-banner.jpg") 12% 50%/cover no-repeat;-webkit-mask-image:linear-gradient(to right,#000 68%,transparent);mask-image:linear-gradient(to right,#000 68%,transparent)}
+.hero--real .hero__photo{position:absolute;inset:0 auto 0 0;width:50%;background:url(hero-photo.jpg) left center/cover no-repeat;-webkit-mask-image:linear-gradient(to right,#000 68%,transparent);mask-image:linear-gradient(to right,#000 68%,transparent)}
 .hero--real .hero__wrap{padding-top:44px;padding-bottom:110px;align-items:flex-start}
 .hero--real .hero__content{width:600px}
 .hero__chip{display:inline-flex;align-items:center;gap:10px;padding:6px 8px 6px 18px;background:#dcecfb;border-radius:999px;font:700 15px/1.6 var(--font-h);color:var(--c-hero)}
@@ -429,3 +429,17 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .svc-req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
 .svc-req .card{padding:24px}
 @media (max-width:980px){.svc-ov,.svc-req{grid-template-columns:minmax(0,1fr)}.svc-ov .sidebar{position:static}}
+
+/* logos: plain, unframed, balanced */
+.logo-tile{border:0;background:none;border-radius:0;padding:0;width:auto;height:54px;display:flex;align-items:center;justify-content:flex-start;box-sizing:border-box}
+.logo-tile img{width:auto;height:auto;max-width:190px;max-height:54px;object-fit:contain;object-position:right center;display:block}
+.logo-tile--dark{background:none;border:0}
+.card--gov .logo-tile{width:100%;height:54px}
+.card--gov>.ico{background:none;border-radius:0;width:54px;height:54px;justify-content:start;display:flex;align-items:center}
+.card--gov>.ico svg{width:34px;height:34px;color:var(--c-primary)}
+.phead__logo{background:#fff;border-radius:14px;padding:8px 16px;justify-content:center;width:170px;height:76px}
+.phead__logo img{max-width:100%;max-height:100%;object-position:center}
+@media (max-width:767px){.phead__logo{width:140px;height:56px}}
+.logo-tile,.card--gov .logo-tile{height:50px}
+.logo-tile img{max-width:172px;max-height:50px}
+.card--gov>.ico{width:50px;height:50px}
