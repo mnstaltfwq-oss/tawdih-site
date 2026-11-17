@@ -419,3 +419,13 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 
 .h3s{font:700 15px/1.6 var(--font-h);color:var(--c-hero);margin:16px 0 6px}
 .art-ol{margin:0;padding-inline-start:22px;color:var(--c-muted);line-height:2}
+
+/* service page (marketing) */
+.svc-hero__cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.svc-ov{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;align-items:start}
+.svc-ov .sidebar{position:sticky;top:96px}
+.svc-lead{font:500 18px/2 var(--font);color:var(--c-hero)!important}
+.svc-ov p{color:var(--c-muted);line-height:2;margin:0 0 12px}
+.svc-req{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+.svc-req .card{padding:24px}
+@media (max-width:980px){.svc-ov,.svc-req{grid-template-columns:minmax(0,1fr)}.svc-ov .sidebar{position:static}}
