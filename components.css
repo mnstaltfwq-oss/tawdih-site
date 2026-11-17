@@ -392,3 +392,20 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .logos-note{font-size:12px;color:var(--c-muted);margin:14px 0 0}
 .footer__bar{height:auto!important;flex-wrap:wrap;gap:6px 28px;padding:16px 0!important;justify-content:space-between}
 .footer__bar .logos-note{color:#a9b8de;margin:0;max-width:640px;line-height:1.7}
+
+/* about + contact */
+.split--about{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:start}
+.split--about p{color:var(--c-muted);line-height:1.95;margin:0 0 12px}
+.note-card--about{border:1px solid var(--c-line);border-inline-start:4px solid var(--c-teal);background:var(--c-surface)}
+.note-card--about h3{font:700 18px/1.5 var(--font-h);color:var(--c-hero);margin:0 0 6px}
+.note-card--about p{line-height:1.9}
+@media (max-width:980px){.split--about{grid-template-columns:minmax(0,1fr);gap:24px}}
+.contact.contact--real{min-height:0;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:32px}
+.contact--real .form{min-height:0}
+.contact--real .req{margin:0}
+.contact-card{flex-direction:row;align-items:center;gap:14px;padding:18px 20px}
+.contact-card h3{margin:0 0 2px}.contact-card__v{font:700 16px/1.6 var(--font);color:var(--c-hero)!important;margin:0}
+.contact-card a{color:var(--c-link)}
+.contact-card .muted{font-size:13px;margin:0}
+.contact--real .btn{justify-self:stretch;justify-content:center}
+@media (max-width:980px){.contact.contact--real{grid-template-columns:minmax(0,1fr)}}
