@@ -333,8 +333,9 @@ const SVC_FAQ = s => [
   ['هل يمكن تنفيذ أكثر من خدمة معاً؟', 'نعم، يمكننا تنظيم عدة إجراءات لمنشأتك في مسار واحد، أو ضمن إحدى باقات إدارة المنصات الحكومية.'],
   ['هل بيانات منشأتي ومستنداتها في أمان؟', 'نتعامل مع بيانات العملاء ومستنداتهم بسرية، ولا نستخدمها إلا في تنفيذ الطلب المتفق عليه.']
 ];
+const txtBlock = t => `<h2 class="h2s">ما هي الخدمة؟</h2><p class="svc-lead">${t.what}</p><h3 class="h3s">متى تحتاجها؟</h3><p>${t.when}</p><h3 class="h3s">كيف نخدمك؟</h3><p>${t.how}</p><h3 class="h3s">ما نحتاجه منك</h3><p>${t.need}</p><h3 class="h3s">ما يميز التنفيذ معنا</h3><p>${t.why}</p>`;
 REAL_T.detail = () => {
-  const i = Math.min(+qp('s') || 0, SVC.length - 1), s = SVC[i], e = ENT[s.e], r = (window.REQ || {})[i];
+  const i = Math.min(+qp('s') || 0, SVC.length - 1), s = SVC[i], e = ENT[s.e], r = (window.REQ || {})[i], t = (window.TXT || {})[i];
   const rel = SVC.map((x, k) => [x, k]).filter(([x, k]) => x.e === s.e && k !== i).slice(0, 6);
   const ul = a => `<ul class="ticks">${a.map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul>`;
   const msg = `أرغب في خدمة: ${s.n} (${e.n})`;
@@ -342,9 +343,9 @@ REAL_T.detail = () => {
   let hero = C.PHeadReal(s.n, s.d, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n, entHref(s.e)], [s.n]]);
   const k = hero.lastIndexOf('</div></section>');
   hero = hero.slice(0, k) + `<div class="svc-hero__cta">${wab('اطلب الخدمة عبر واتساب').replace(WA, waTxt(msg))}<a class="btn btn--ghost" href="#faq">أسئلة شائعة</a></div>` + hero.slice(k);
-  const overview = `<div class="svc-ov"><div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}<h2 class="h2s">ما هي الخدمة؟</h2><p class="svc-lead">${s.d}</p>
-      <p>نتولى عنك تنظيم هذا الإجراء من البداية: نراجع حالة منشأتك، ونحدد ما يلزم، ونجهّز البيانات والمستندات، ثم نتابع الطلب عبر القنوات الرسمية حتى صدور النتيجة، لتتفرغ لإدارة أعمالك.</p>
-      ${r && r.incl && r.incl.length ? `<h3 class="h3s">ما تشمله الخدمة</h3>${ul(r.incl)}` : ''}
+  const overview = `<div class="svc-ov"><div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}${t ? txtBlock(t) : `<h2 class="h2s">ما هي الخدمة؟</h2><p class="svc-lead">${s.d}</p>
+      <p>نتولى عنك تنظيم هذا الإجراء من البداية: نراجع حالة منشأتك، ونحدد ما يلزم، ونجهّز البيانات والمستندات، ثم نتابع الطلب عبر القنوات الرسمية حتى صدور النتيجة، لتتفرغ لإدارة أعمالك.</p>`}
+      ${!t && r && r.incl && r.incl.length ? `<h3 class="h3s">ما تشمله الخدمة</h3>${ul(r.incl)}` : ''}
       <h3 class="h3s">الجهة المختصة</h3><p><a href="${entHref(s.e)}"><b>${e.n}</b></a>: ${ENT_ABOUT[s.e] || ''}</p></div>
     ${C.Side('ابدأ طلبك الآن', 'أرسل لنا اسم الخدمة وبيانات منشأتك، وسنوضح لك المتطلبات والخطوات المناسبة.', msg)}</div>`;
   const why = `${C.SH('لماذا توضيح المعرفة', 'نختصر عليك الطريق', 'أربعة أسباب تجعل تنفيذ هذه الخدمة معنا أيسر.')}<div class="grid grid--4 feats" style="gap:var(--gap-feat)">${[
