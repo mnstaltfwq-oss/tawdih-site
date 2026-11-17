@@ -121,7 +121,7 @@ ${col('روابط سريعة', [['الرئيسية', 'index.html'], ['من نح�
 <div class="float"><a class="wa" href="${WA}" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">${C.ico('chat', 22)}</a><i aria-hidden="true"></i></div><button class="totop" aria-label="للأعلى"></button><div class="mobile-cta">${wab('اطلب عبر واتساب')}</div>`;
 };
 
-C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="img" aria-label="مكتب أعمال مع أفق مدينة الرياض"></div><div class="hero__wrap"><div class="hero__content">
+C.Hero = () => `<section class="hero hero--real"><div class="hero__photo" role="img" aria-label="صاحبا منشأة سعودية يراجعان مستندات العمل في مكتب"></div><div class="hero__wrap"><div class="hero__content">
 <div class="hero__chip"><span class="hero__chip-ico">${C.ico('clock', 22)}</span>أعمالك تستحق وقتك.. وإجراءاتها علينا</div>
 <h1>خدمات منشأتك الحكومية<br><span class="hl">في مكان واحد</span></h1>
 <p>من تأسيس الشركات وإصدار التراخيص إلى إدارة شؤون الموظفين والمنصات الحكومية، نساعدك في إنجاز إجراءات منشأتك ومتابعتها بخطوات واضحة ومنظمة.</p>

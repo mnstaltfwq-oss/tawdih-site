@@ -295,7 +295,7 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 
 /* ---- hero + stats (design from banner) ---- */
 .hero--real{background:linear-gradient(115deg,#f6f9fe 30%,#e4eefb);color:var(--c-hero)}
-.hero--real .hero__photo{position:absolute;inset:0 auto 0 0;width:50%;background:url(hero-photo.jpg) left center/cover no-repeat;-webkit-mask-image:linear-gradient(to right,#000 68%,transparent);mask-image:linear-gradient(to right,#000 68%,transparent)}
+.hero--real .hero__photo{position:absolute;inset:0 auto 0 0;width:50%;background:url("hero-photo-banner.jpg") 12% 50%/cover no-repeat;-webkit-mask-image:linear-gradient(to right,#000 68%,transparent);mask-image:linear-gradient(to right,#000 68%,transparent)}
 .hero--real .hero__wrap{padding-top:44px;padding-bottom:110px;align-items:flex-start}
 .hero--real .hero__content{width:600px}
 .hero__chip{display:inline-flex;align-items:center;gap:10px;padding:6px 8px 6px 18px;background:#dcecfb;border-radius:999px;font:700 15px/1.6 var(--font-h);color:var(--c-hero)}
