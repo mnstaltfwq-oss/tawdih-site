@@ -213,12 +213,29 @@ const _rb = window.REAL_BIND;
 window.REAL_BIND = () => { _rb && _rb(); const g = document.getElementById('art-grid'); if (!g) return; document.querySelectorAll('[data-cat]').forEach(b => { if (b.tagName !== 'BUTTON') return; b.addEventListener('click', () => { document.querySelectorAll('button[data-cat]').forEach(x => x.setAttribute('aria-pressed', x === b)); [...g.children].forEach(c => c.hidden = b.dataset.cat !== 'all' && c.dataset.cat !== b.dataset.cat); }); }); };
 
 /* Packages page */
-C.PkgCard = p => `<article class="card card--real pkg${p.feat ? ' pkg--feat' : ''}">${p.feat ? '<span class="pkg__badge">الأكثر طلباً</span>' : ''}<h3>${p.n}</h3><p class="pkg__tag">${p.tag}</p><p>${p.d}</p><div class="pkg__aud"><b>الفئة المستهدفة</b><span>${p.aud}</span></div><div class="pkg__svc"><b>الخدمات المشمولة</b>${p.g.map(([t, l]) => `${t ? `<h4>${t}</h4>` : ''}<ul class="art-ul pkg__ul">${l.map(x => `<li>${x}</li>`).join('')}</ul>`).join('')}</div><div class="pkg__type"><b>نوع الباقة</b><span>${p.type}</span></div><a class="btn ${p.feat ? 'btn--primary' : 'btn--outline'}" href="${WA}?text=${encodeURIComponent(p.wa)}" target="_blank" rel="noopener">${p.btn}</a></article>`;
-REAL_T.packages = () => [
-  C.PHeadReal('باقات إدارة المنصات الحكومية', 'ثلاث باقات مصممة لتناسب مرحلة منشأتك، من التأسيس حتى الإدارة المستمرة.', [['الرئيسية', 'index.html'], ['الباقات']]),
-  C.Section(`${C.SH('', 'حلول متكاملة لكل مرحلة من مراحل أعمالك', 'سواء كنت تبدأ مشروعك أو تطوّر أعمال منشأتك أو تبحث عن إدارة مستمرة لمنصاتك الحكومية، نقدم لك ثلاث باقات مصممة لتناسب احتياجات منشأتك وتساعدك على تنظيم إجراءاتها ومتابعتها.')}<div class="grid grid--3 grid--pkg">${PKG.map(C.PkgCard).join('')}</div>`),
-  C.Section(C.CTAReal(), 'sec--flush-top')
+C.PkgCard = p => `<article class="card card--real pkg${p.feat ? ' pkg--feat' : ''}">${p.feat ? '<span class="pkg__badge">الأكثر طلباً</span>' : ''}<h3>${p.n}</h3><p class="pkg__tag">${p.aud}</p><div class="pkg__price"><b>${p.price}</b><span>ريال شهرياً</span></div><div class="pkg__meta"><span>${p.plat} منصات</span><span>${p.svc} خدمة</span></div><p>${p.d}</p><a class="btn ${p.feat ? 'btn--primary' : 'btn--outline'}" href="${WA}?text=${encodeURIComponent(p.wa)}" target="_blank" rel="noopener">${p.btn}</a><div class="pkg__svc"><b>الخدمات المشمولة</b>${p.base ? `<p class="pkg__base">${p.base}</p>` : ''}${p.g.map(([t, l]) => `<details class="acc acc--pkg"><summary>${t}</summary><div class="in"><ul class="art-ul pkg__ul">${l.map(x => `<li>${x}</li>`).join('')}</ul></div></details>`).join('')}</div></article>`;
+const PKG_FAQ = [
+  ['ما مدة الباقة؟', 'الباقات شهرية بعقد سنوي.'],
+  ['هل أستطيع الانتقال إلى باقة أعلى؟', 'نعم، يمكنك الانتقال إلى باقة أعلى متى احتجت.'],
+  ['هل رسوم الجهات الحكومية داخلة في السعر؟', 'لا، تُسدَّد الرسوم التي تفرضها الجهات الحكومية وفق ما تعلنه كل جهة.'],
+  ['هل أحتاج إلى تفويض؟', 'نعم، نعمل بتفويضك النظامي وعبر القنوات الرسمية فقط.'],
+  ['ماذا لو احتجت خدمة غير مذكورة في الباقة؟', 'تواصل معنا ونوضح لك إمكانية إضافتها أو طلبها منفصلة.'],
+  ['كيف أبدأ؟', 'تواصل معنا عبر واتساب، نحدد معك الباقة المناسبة ونبدأ.']
 ];
+REAL_T.packages = () => {
+  document.title = 'باقات الخدمات الحكومية | توضيح المعرفة لخدمات الأعمال';
+  const ck = v => v === true ? '✓' : v || '—';
+  const rows = [['السعر شهرياً', '2,250', '3,400', '5,000'], ['عدد المنصات', 7, 9, 12], ['عدد الخدمات', 30, 54, 81], ['قوى والتأمينات والزكاة', true, true, true], ['الرخص التجارية (بلدي)', 0, true, true], ['حماية الأجور (مدد)', 0, true, true], ['الشهادات الصحية وتصاريح النشاط', 0, 0, true], ['الاستثمار وصندوق الموارد البشرية', 0, 0, true], ['الاستشارات الحكومية', 0, 0, '30 استشارة']];
+  return [
+  C.PHeadReal('باقات الخدمات الحكومية', 'ثلاث باقات شهرية تتولى إجراءات منصاتك الحكومية ومتابعتها، لتتفرغ لإدارة نشاطك. اختر ما يناسب حجم منشأتك.', [['الرئيسية', 'index.html'], ['الباقات']]),
+  C.Section(`<div class="split split--about"><div>${C.SH('', 'منصات حكومية متعددة.. ومتابعة واحدة', '')}<p>قوى والتأمينات ووزارة التجارة وبلدي وأبشر والزكاة والضريبة، لكل منصة إجراءاتها ومواعيدها. في توضيح المعرفة نتولى هذه المتابعة عنك: نجهّز الطلبات ونقدّمها عبر القنوات الرسمية، ونتابعها حتى صدور النتيجة، وننبّهك بالتجديدات والمواعيد المهمة قبل أن تفوت.</p></div><ul class="ticks">${['متابعة شهرية منتظمة لإجراءات منشأتك.', 'نعمل نيابةً عنك وفق تفويضك، وعبر القنوات الرسمية فقط.', 'تواصل مباشر عبر واتساب مع فريق يعرف منشأتك.', 'باقة تكبر معك: انتقل إلى باقة أعلى متى احتجت.'].map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul></div>`),
+  C.Section(`${C.SH('اختر باقتك', 'ثلاث باقات تناسب حجم منشأتك', 'الأسعار شهرية بعقد سنوي، ولا تشمل الرسوم التي تفرضها الجهات الحكومية نفسها.')}<div class="grid grid--3 grid--pkg">${PKG.map(C.PkgCard).join('')}</div>`, 'sec--alt'),
+  C.Section(`${C.SH('المقارنة', 'الفرق بين الباقات', '')}<div class="tbl-wrap"><table class="tbl"><thead><tr><th scope="col">الميزة</th><th scope="col">الفضية</th><th scope="col">الذهبية</th><th scope="col">البلاتينية</th></tr></thead><tbody>${rows.map(([k, a, b, c]) => `<tr><th scope="row" style="background:#fff">${k}</th><td>${ck(a)}</td><td>${ck(b)}</td><td>${ck(c)}</td></tr>`).join('')}</tbody></table></div>`),
+  C.Section(`<div class="split split--about"><div>${C.SH('', 'كيف أختار باقتي؟', '')}<ul class="ticks">${['منشأة جديدة أو صغيرة وتحتاج الأساسيات: الفضية.', 'منشأة تنمو ولديها رخص تجارية وموظفون: الذهبية.', 'شركة كبيرة بإجراءات متعددة واحتياج استشاري: البلاتينية.', 'لست متأكداً؟ أخبرنا بنشاطك وعدد موظفيك عبر واتساب، ونرشّح لك الأنسب.'].map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul></div><aside class="note-card note-card--about"><h3>ما الذي لا تشمله الباقات؟</h3><p>الرسوم التي تفرضها الجهات الحكومية، فهي تُسدَّد وفق ما تعلنه كل جهة. والخدمات خارج القوائم أعلاه، ويمكن طلبها منفصلة. ولا نضمن قبول أي طلب أو سرعة صدوره، فالقرار للجهة المختصة. ولا ننفّذ شيئاً إلا بتفويضك وموافقتك.</p></aside></div>`, 'sec--alt'),
+  C.Section(`${C.SH('الأسئلة الشائعة', 'إجابات عن الباقات', '')}<div class="faq faq--side"><div>${PKG_FAQ.map(([q, a]) => `<details class="acc"><summary>${q}</summary><div class="in"><p>${a}</p></div></details>`).join('')}</div><aside class="card card--real faq__aside"><h3>لم تجد إجابة عن استفسارك؟</h3><p>اكتب لنا عن حالتك، وسنوضح لك الباقة المناسبة.</p>${wab('اسألنا عبر واتساب')}</aside></div>`),
+  C.Section(C.CTAReal(), 'sec--flush-top')
+  ];
+};
 
 /* About + Contact pages */
 REAL_T.about = () => [

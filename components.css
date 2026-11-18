@@ -443,3 +443,10 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 .logo-tile,.card--gov .logo-tile{height:50px}
 .logo-tile img{max-width:172px;max-height:50px}
 .card--gov>.ico{width:50px;height:50px}
+
+/* packages v2 */
+.pkg__price{display:flex;align-items:baseline;gap:8px;margin:2px 0}.pkg__price b{font-family:var(--font-h);font-size:40px;line-height:1;color:var(--c-primary)}.pkg__price span{color:var(--c-muted,#5a6575);font-weight:700}
+.pkg__meta{display:flex;gap:8px;flex-wrap:wrap}.pkg__meta span{background:var(--c-surface);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:700;color:var(--c-hero)}
+.pkg__base{margin:8px 0;font-weight:700;color:var(--c-primary);font-size:14px}
+.acc--pkg summary{font-size:15px;font-weight:700}.pkg__svc{display:grid;gap:8px}
+.grid--pkg{align-items:stretch}.acc--pkg summary{padding-block:10px;min-height:0}.acc--pkg{margin:0}
