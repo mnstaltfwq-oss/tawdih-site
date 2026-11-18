@@ -358,11 +358,11 @@ REAL_T.detail = () => {
   let hero = C.PHeadReal(s.n, s.d, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n, entHref(s.e)], [s.n]]);
   const k = hero.lastIndexOf('</div></section>');
   hero = hero.slice(0, k) + `<div class="svc-hero__cta">${wab('اطلب الخدمة عبر واتساب').replace(WA, waTxt(msg))}<a class="btn btn--ghost" href="#faq">أسئلة شائعة</a></div>` + hero.slice(k);
-  const overview = `<div class="svc-ov"><div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}${t ? txtBlock(t) : `<h2 class="h2s">ما هي الخدمة؟</h2><p class="svc-lead">${s.d}</p>
+  const overview = `<div>${s.t ? `<p>${tagCls(s.t)}</p>` : ''}${t ? txtBlock(t) : `<h2 class="h2s">ما هي الخدمة؟</h2><p class="svc-lead">${s.d}</p>
       <p>نتولى عنك تنظيم هذا الإجراء من البداية: نراجع حالة منشأتك، ونحدد ما يلزم، ونجهّز البيانات والمستندات، ثم نتابع الطلب عبر القنوات الرسمية حتى صدور النتيجة، لتتفرغ لإدارة أعمالك.</p>`}
       ${!t && r && r.incl && r.incl.length ? `<h3 class="h3s">ما تشمله الخدمة</h3>${ul(r.incl)}` : ''}
-      <h3 class="h3s">الجهة المختصة</h3><p><a href="${entHref(s.e)}"><b>${e.n}</b></a>: ${ENT_ABOUT[s.e] || ''}</p></div>
-    ${C.Side('ابدأ طلبك الآن', 'أرسل لنا اسم الخدمة وبيانات منشأتك، وسنوضح لك المتطلبات والخطوات المناسبة.', msg)}</div>`;
+      <h3 class="h3s">الجهة المختصة</h3><p><a href="${entHref(s.e)}"><b>${e.n}</b></a>: ${ENT_ABOUT[s.e] || ''}</p></div>`;
+  const sideBox = C.Side('ابدأ طلبك الآن', 'أرسل لنا اسم الخدمة وبيانات منشأتك، وسنوضح لك المتطلبات والخطوات المناسبة.', msg);
   const why = `${C.SH('لماذا توضيح المعرفة', 'نختصر عليك الطريق', 'أربعة أسباب تجعل تنفيذ هذه الخدمة معنا أيسر.')}<div class="grid grid--4 feats" style="gap:var(--gap-feat)">${[
     ['clock', 'وقت أقل', 'نتولى الإجراء ومتابعته، فلا تنشغل بتفاصيل المنصات.'],
     ['doc', 'وضوح قبل البدء', 'نشرح لك المتطلبات والمستندات والخطوات قبل أي إجراء.'],
@@ -375,12 +375,9 @@ REAL_T.detail = () => {
     const docs = r.docs.length ? ul(r.docs) : `<p>${r.docsNote || 'لم تنشر الجهة قائمة بمستندات محددة لهذه الخدمة، ونؤكدها لك قبل التنفيذ.'}</p>`;
     reqs = `<div class="svc-req"><div class="card card--real"><h3 class="h3s" style="margin-top:0">معلومات سريعة</h3><dl class="dl">${rows}</dl>${r.cond.length ? `<h3 class="h3s">الشروط</h3>${ul(r.cond)}` : ''}<h3 class="h3s">المستندات المطلوبة</h3>${docs}</div>${r.steps.length ? `<div class="card card--real"><h3 class="h3s" style="margin-top:0">خطوات الخدمة على المنصة</h3><ol class="art-ol">${r.steps.map(x => `<li>${x}</li>`).join('')}</ol></div>` : ''}</div><p class="muted" style="margin-top:12px">المصدر: ${r.src}. قد تتغير المتطلبات، ونراجعها قبل تنفيذ طلبك.</p>`;
   } else reqs = `<div class="note-card note-card--about"><h3>المتطلبات والمستندات</h3><p>تختلف المتطلبات بحسب حالة منشأتك. نراجعها مع الجهة المختصة ونوضحها لك بدقة قبل البدء، فتواصل معنا لنزوّدك بها.</p></div>`;
+  const faq = `<div id="faq"></div>${C.SH('الأسئلة الشائعة', 'إجابات تساعدك قبل طلب الخدمة', '')}<div>${SVC_FAQ(s).map(([q, a]) => `<details class="acc"><summary>${q}</summary><div class="in"><p>${a}</p></div></details>`).join('')}</div>`;
+  const relB = rel.length ? `<div class="svc-blk">${C.SH('خدمات مرتبطة', `خدمات أخرى من ${e.n}`, '')}<div class="grid grid--svc">${rel.map(([x, kk]) => C.SvcCard(x, kk, false)).join('')}</div></div>` : '';
   return [hero,
-    C.Section(overview),
-    C.Section(why, 'sec--alt'),
-    C.Section(`${C.SH('المتطلبات', 'ما تحتاج معرفته عن الخدمة', '')}${reqs}`),
-    C.Section(`${C.SH('آلية العمل', 'كيف ننفذ طلبك', '')}${C.StepsReal()}`, 'sec--alt'),
-    rel.length ? C.Section(`${C.SH('خدمات مرتبطة', `خدمات أخرى من ${e.n}`, '')}<div class="grid grid--svc">${rel.map(([x, kk]) => C.SvcCard(x, kk, false)).join('')}</div>`) : '',
-    C.Section(`<div id="faq"></div>${C.SH('الأسئلة الشائعة', 'إجابات تساعدك قبل طلب الخدمة', '')}<div class="faq faq--side"><div>${SVC_FAQ(s).map(([q, a]) => `<details class="acc"><summary>${q}</summary><div class="in"><p>${a}</p></div></details>`).join('')}</div><aside class="card card--real faq__aside"><h3>لم تجد إجابة عن استفسارك؟</h3><p>اكتب لنا عن حالتك، وسنوضح لك الخطوات المناسبة.</p>${wab('اسألنا عبر واتساب')}</aside></div>`, 'sec--alt'),
+    C.Section(`<div class="svc-ov"><div class="svc-main">${overview}<div class="svc-blk">${why}</div><div class="svc-blk">${C.SH('المتطلبات', 'ما تحتاج معرفته عن الخدمة', '')}${reqs}</div><div class="svc-blk">${C.SH('آلية العمل', 'كيف ننفذ طلبك', '')}${C.StepsReal()}</div>${relB}<div class="svc-blk">${faq}</div></div>${sideBox}</div>`),
     C.Section(C.CTAReal(), 'sec--flush-top')];
 };
