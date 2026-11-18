@@ -492,3 +492,16 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
   .hero-m{display:none}
   .hero-banner+*{margin-top:0}
 }
+
+/* banner on phones too */
+.hero-banner{display:block;position:relative;width:100%;line-height:0;background:#fff}
+.hero-banner img{display:block;width:100%;height:auto}
+.hero-m{display:none}
+.hero-banner__hit--wa{left:27.3%;top:29.8%;width:45.5%;height:5.5%}
+.hero-banner__hit--svc{left:27.4%;top:36.3%;width:45.1%;height:5.2%}
+@media (min-width:768px){
+  .hero-banner__hit--wa{left:77%;top:50.3%;width:19.2%;height:9.8%}
+  .hero-banner__hit--svc{left:59.8%;top:50.3%;width:16.2%;height:9.8%}
+}
+.hero-banner__hit{position:absolute;display:block;border-radius:999px}
+.hero-banner__hit:focus-visible{outline:3px solid #0080e0;outline-offset:2px}
