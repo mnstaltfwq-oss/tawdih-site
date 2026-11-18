@@ -61,4 +61,11 @@ function bind() {
     f.querySelectorAll('[required]').forEach(i => { const bad = !i.value.trim(); i.closest('.field').classList.toggle('has-error', bad); ok = ok && !bad; });
     if (ok && f.hasAttribute('data-wa')) { const v = n => (f.elements[n].value || '').trim(); const t = `طلب استشارة من الموقع\nالاسم: ${v('name')}\nالمنشأة: ${v('co')}\nالجوال: ${v('tel')}\nالجهة: ${v('gov')}\nالخدمة: ${v('svc')}\nالتفاصيل: ${v('msg')}`; window.open('https://wa.me/966535448100?text=' + encodeURIComponent(t), '_blank', 'noopener'); f.querySelector('.form-ok').hidden = false; } else if (ok) f.querySelector('button[type=submit]').textContent = '✓'; }));
 }
+window.setDesc = d => { const m = document.querySelector('meta[name=description]'); if (m && d) { m.content = d; const o = document.querySelector('meta[property="og:description"]'); if (o) o.content = d; } };
+/* تتبّع ضغطات واتساب: يرسل الحدث إلى GA4 / GTM / Plausible إن أضيفت لاحقًا، ولا يتطلب خادمًا */
+document.addEventListener('click', e => {
+  const l = e.target.closest && e.target.closest('a[href*="wa.me"]'); if (!l) return;
+  const d = { event: 'whatsapp_click', page: location.pathname.split('/').pop() || 'index.html', label: (l.textContent || '').trim().slice(0, 60) };
+  try { (window.dataLayer = window.dataLayer || []).push(d); if (window.gtag) window.gtag('event', 'whatsapp_click', d); if (window.plausible) window.plausible('whatsapp_click', { props: d }); } catch (_) {}
+});
 window.mount = mount;

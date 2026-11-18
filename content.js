@@ -155,7 +155,7 @@ REAL_T.directory = () => [
 
 REAL_T.entity = () => {
   const ei = Math.min(+qp('e') || 0, ENT.length - 1), e = ENT[ei], list = SVC.map((s, i) => [s, i]).filter(([s]) => s.e === ei);
-  document.title = `${e.n} | توضيح المعرفة لخدمات الأعمال`;
+  document.title = `${e.n} | توضيح المعرفة لخدمات الأعمال`; setDesc(`خدمات ${e.n} التي نساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها عبر القنوات الرسمية.`);
   return [C.PHeadReal(`خدمات ${e.n}`, `${list.length} ${list.length > 10 ? 'خدمة' : 'خدمات'} نساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.`, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n]], ENT_LOGO[ei]),
     C.Section(`<div class="detail"><div><input class="search search--wide" id="svc-q" type="search" placeholder="ابحث عن خدمة في ${e.n}" aria-label="بحث"><p class="muted" id="svc-count" role="status"></p><div class="grid grid--svc grid--svcs" id="svc-grid">${list.map(([s, i]) => C.SvcCard(s, i, false)).join('')}</div><p class="empty" id="svc-empty" hidden>لا توجد خدمة مطابقة لبحثك.</p></div>${C.Side('تحتاج خدمة من ' + e.n + '؟', 'تواصل مع فريق توضيح المعرفة وحدد الإجراء الذي تحتاجه، وسنساعدك في مراجعة المتطلبات والمستندات اللازمة.', `أرغب في الاستفسار عن خدمات ${e.n}`)}</div>`).replace('class="container"', 'class="container container--wide"'),
     C.Section(C.CTAReal(), 'sec--flush-top')];
@@ -201,7 +201,7 @@ REAL_T.blog = () => { const cats = [...new Set(ART.map(a => a.cat))]; return [
   C.Section(C.CTAReal(), 'sec--flush-top')]; };
 REAL_T.article = () => {
   const a = ART.find(x => x.id === qp('a')) || ART.find(x => x.body) || ART[0];
-  document.title = `${a.t} | توضيح المعرفة لخدمات الأعمال`;
+  document.title = `${a.t} | توضيح المعرفة لخدمات الأعمال`; setDesc(a.d);
   const rel = ART.filter(x => x !== a && x.body).slice(0, 3);
   const body = a.body ? a.body.map(([k, v]) => k === 'h' ? `<h2 class="h2s">${v}</h2>` : k === 'h3' ? `<h3 class="h3s">${v}</h3>` : k === 'cta' ? `<p class="art-cta">${v}</p>` : k === 'ol' ? `<ol class="art-ol">${v.map(x => `<li>${x}</li>`).join('')}</ol>` : k === 'ul' ? `<ul class="art-ul">${v.map(x => `<li>${x}</li>`).join('')}</ul>` : `<p>${v}</p>`).join('') : `<p>هذا المقال قيد الإعداد وسيُنشر قريباً.</p>`;
   return [C.PHeadReal(a.t, a.d, [['الرئيسية', 'index.html'], ['مركز المعرفة', 'blog.html'], [a.cat]]),
@@ -354,7 +354,7 @@ REAL_T.detail = () => {
   const rel = SVC.map((x, k) => [x, k]).filter(([x, k]) => x.e === s.e && k !== i).slice(0, 6);
   const ul = a => `<ul class="ticks">${a.map(x => `<li>${C.ico('chk', 20)}${x}</li>`).join('')}</ul>`;
   const msg = `أرغب في خدمة: ${s.n} (${e.n})`;
-  document.title = `${s.n} | توضيح المعرفة لخدمات الأعمال`;
+  document.title = `${s.n} | توضيح المعرفة لخدمات الأعمال`; setDesc(`${s.n}: شرح الخدمة ومتطلباتها وخطواتها، ونتابع طلبك عبر القنوات الرسمية. ${(s.d||'').slice(0,90)}`);
   let hero = C.PHeadReal(s.n, s.d, [['الرئيسية', 'index.html'], ['جميع الخدمات', 'services.html'], [e.n, entHref(s.e)], [s.n]]);
   const k = hero.lastIndexOf('</div></section>');
   hero = hero.slice(0, k) + `<div class="svc-hero__cta">${wab('اطلب الخدمة عبر واتساب').replace(WA, waTxt(msg))}<a class="btn btn--ghost" href="#faq">أسئلة شائعة</a></div>` + hero.slice(k);
