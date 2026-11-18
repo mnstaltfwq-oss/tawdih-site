@@ -479,3 +479,16 @@ h1,h2,h3,.sh .ph-line--title,.btn{font-family:var(--font-h)}
 @media (max-width:767px){.svc-main .grid--4.feats,.svc-main .steps,.grid--svc{grid-template-columns:minmax(0,1fr)}.svc-main{gap:36px}}
 @media (max-width:980px){.svc-main .grid--svc{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:767px){.svc-main .grid--svc{grid-template-columns:minmax(0,1fr)}}
+
+/* home banner (image) on tablet/desktop; coded hero on phones */
+.hero-banner{display:none}
+@media (min-width:768px){
+  .hero-banner{display:block;position:relative;width:100%;line-height:0;background:#fff}
+  .hero-banner img{display:block;width:100%;height:auto}
+  .hero-banner__hit{position:absolute;display:block;border-radius:999px}
+  .hero-banner__hit--wa{left:77%;top:50.3%;width:19.2%;height:9.8%}
+  .hero-banner__hit--svc{left:59.8%;top:50.3%;width:16.2%;height:9.8%}
+  .hero-banner__hit:focus-visible{outline:3px solid #0080e0;outline-offset:2px}
+  .hero-m{display:none}
+  .hero-banner+*{margin-top:0}
+}

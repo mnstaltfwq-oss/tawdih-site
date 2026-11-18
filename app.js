@@ -1,6 +1,6 @@
 /* Page templates + interactions */
 const T = {
-  home: () => [C.Hero(), C.StatisticsPanel(),
+  home: () => [C.HeroBanner(), '<div class="hero-m">' + C.Hero() + C.StatisticsPanel() + '</div>',
     C.Section(C.SH('خدمات الأعمال', 'خدمات الجهات الحكومية لمنشأتك', 'بدل التنقل بين المنصات والجهات الحكومية، اختر الخدمة التي تحتاجها، ودع فريق توضيح المعرفة يساعدك في معرفة متطلباتها وتجهيز إجراءاتها ومتابعة تنفيذها.') + C.GovGrid() + '<div style="text-align:center;margin-top:28px"><a class="btn btn--primary" href="services.html">استعرض جميع الخدمات</a></div>', 'hx-996'),
     C.Section(C.ConsultReal(), 'hx-605'),
     C.Section(C.SH('', 'لماذا تختار توضيح المعرفة لإدارة إجراءات منشأتك؟') + C.WhyReal(), 'sec--alt hx-395'),
